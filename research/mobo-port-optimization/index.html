@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>선박 운항 다목적 최적화 | 윤진혁</title>
+    <meta name="description" content="연료 소비와 대기오염물질 노출을 동시에 고려하는 물리 기반 선박 운항 다목적 최적화 (Ocean Engineering 2026)">
+    <meta name="color-scheme" content="light dark">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/style.css?v=2026q3">
+</head>
+<body class="research-detail-page">
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="../../index.html#hero" class="nav-logo">JH Yun</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../../index.html#highlights" class="nav-link">Home</a></li>
+                <li><a href="#overview" class="nav-link active">Overview</a></li>
+                <li><a href="#explore" class="nav-link">Model</a></li>
+                <li><a href="#figures" class="nav-link">Figures</a></li>
+                <li><a href="#results" class="nav-link">Results</a></li>
+                <li><a href="#outputs" class="nav-link">Related</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="detail-main">
+        <section class="detail-hero-section" id="overview">
+            <div class="container">
+                <div class="detail-breadcrumb">Research Highlight A</div>
+                <div class="detail-hero-grid">
+                    <div class="detail-hero-copy">
+                        <span class="detail-kicker">Physics-Informed Decision Support</span>
+                        <h1 class="detail-title">연료 소비와 대기오염물질 노출을 고려한 물리 기반 선박 운항 다목적 최적화</h1>
+                        <p class="detail-summary">항만 도시의 선박 배출 대책은 일률적인 감속으로 총배출량을 줄이는 방식이 주를 이루지만, 이는 물류 생산성을 저하시키고 국지 기상에 따른 최대 농도를 줄이지 못할 수 있다. 본 연구는 희소 센서 자료로부터 physics-informed deep operator network(PI-E-DON)로 고해상도 유동장을 복원하고, 오염물질 확산을 실시간으로 예측한 뒤, 다목적 베이지안 최적화(multi-objective Bayesian optimization, MOBO)로 경로와 속도 분포의 Pareto 최적해를 도출하는 틀을 제안하였다. 부산항 인근 사례를 포함한 비정상 층류 시나리오에서 hypervolume을 20–35% 개선하고, 최대 노출을 34–78% 감소시켰다.</p>
+                        <div class="detail-keywords">
+                            <span class="detail-keyword">PI-E-DON</span>
+                            <span class="detail-keyword">MOBO · qLogEHVI</span>
+                            <span class="detail-keyword">Green Ship Routing</span>
+                            <span class="detail-keyword">Sparse Sensing</span>
+                            <span class="detail-keyword">Ocean Engineering 2026</span>
+                        </div>
+                        <div class="detail-stat-grid">
+                            <div class="detail-stat-card">
+                                <span class="detail-stat-value">34–78%</span>
+                                <span class="detail-stat-label">Peak exposure reduction vs scenario-specific baselines</span>
+                            </div>
+                            <div class="detail-stat-card">
+                                <span class="detail-stat-value">+20–35%</span>
+                                <span class="detail-stat-label">Hypervolume improvement over the initial design set</span>
+                            </div>
+                            <div class="detail-stat-card">
+                                <span class="detail-stat-value">≈ 10 min</span>
+                                <span class="detail-stat-label">200 MOBO iterations on a single RTX 4090</span>
+                            </div>
+                        </div>
+                        <div class="detail-actions">
+                            <a href="#explore" class="btn btn-primary"><i class="fas fa-project-diagram"></i> 개념 모델</a>
+                            <a href="../../index.html#highlights" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Highlights로 돌아가기</a>
+                        </div>
+                    </div>
+                    <figure class="detail-hero-figure">
+                        <img src="../../assets/research/mobo-port-optimization/problem-overview-bezier-route-speed.jpg" alt="Overview of the ship-navigation optimization problem with protected and exclusion zones, Bézier path and Bézier speed-profile parameterization" class="detail-hero-image" loading="eager" decoding="async">
+                        <figcaption class="detail-hero-caption">(a) 보호구역 Ω<sub>P</sub>와 통항 제한 구역 Ω<sub>X</sub>, 기준 경로와 최적 경로의 개념도, (b) Bézier 경로 매개화, (c) Bézier 속도 분포 매개화. Ocean Engineering 362 (2026) 126293, Fig. 1.</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-section lab-section" id="explore" aria-labelledby="explore-title">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Conceptual Model</span>
+                    <h2 class="section-title" id="explore-title">경로·속도 정책과 노출–연료 상충 관계</h2>
+                    <p class="section-subtitle">배경 유동, 선박 배출, 오염물질 이류·확산, 두 목적함수(J<sub>1</sub>: 보호구역 최대 농도, J<sub>2</sub>: 연료 소비 대리 지표)의 관계를 개념 모델로 나타낸다. 유동·확산·탐색은 개념적 재현이며, 수치는 논문 결과를 따른다.</p>
+                </div>
+
+                <div class="lab" data-lab="port">
+                    <figure class="lab-fallback">
+                        <img src="../../assets/research/mobo-port-optimization/busan-southerly-pollutant-fields-baseline-vs-pareto.jpg" alt="Pollutant concentration fields for the Busan case under southerly inflow for the baseline and representative Pareto solutions" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">개념 모델은 JavaScript 환경에서 표시된다. 위 그림은 부산항 인근 사례(남풍 유입)의 기준 경로와 대표 Pareto 해의 오염물질 농도장이다(Ocean Engineering 2026, Fig. 15).</figcaption>
+                    </figure>
+
+                    <div class="lab-live" hidden>
+                        <div class="lab-toolbar">
+                            <div class="lab-steps" role="tablist" aria-label="설명 단계">
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-port"><span class="lab-step-num">1</span>문제 정의</button>
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-port"><span class="lab-step-num">2</span>희소 센싱</button>
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-port"><span class="lab-step-num">3</span>경로·속도 매개화</button>
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-port"><span class="lab-step-num">4</span>Pareto 해</button>
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-port"><span class="lab-step-num">5</span>정책 탐색</button>
+                            </div>
+                            <div class="lab-transport">
+                                <div class="lab-seg" role="radiogroup" aria-label="유입 풍향">
+                                    <label><input type="radio" name="lab-inflow" value="south" checked><span>남풍 유입</span></label>
+                                    <label><input type="radio" name="lab-inflow" value="east"><span>동풍 유입</span></label>
+                                </div>
+                                <button class="lab-btn" type="button" data-act="play" aria-label="애니메이션 일시정지">일시정지</button>
+                                <button class="lab-btn" type="button" data-act="reset">초기화</button>
+                            </div>
+                        </div>
+
+                        <div class="lab-stage" id="lab-stage-port" role="tabpanel" aria-label="개념 모델 화면">
+                            <div class="lab-canvas-wrap lab-canvas-map">
+                                <canvas class="lab-canvas" role="img" aria-label="선박 경로, 배출된 오염물질의 확산, 보호구역과 통항 제한 구역의 개념 애니메이션. 경로 제어점은 1–3 키로 선택하고 방향키로 이동할 수 있다."></canvas>
+                                <span class="lab-badge">개념 모델 · 논문 계산 결과 아님</span>
+                                <div class="lab-legend lab-legend-port" aria-hidden="true"><span>농도 c<i class="lab-colorbar lab-colorbar-conc"></i></span><span><i class="lab-swatch lab-swatch-path"></i>경로</span><span><i class="lab-swatch lab-swatch-base"></i>기준 경로</span></div>
+                                <span class="lab-debug" hidden></span>
+                            </div>
+                            <p class="lab-caption"></p>
+                            <p class="lab-sr" aria-live="polite"></p>
+                        </div>
+
+                        <div class="lab-body">
+                            <div class="lab-chart-card">
+                                <div class="lab-chart-head">
+                                    <h3 class="lab-card-title">목적 공간 (개념 모델)</h3>
+                                    <span class="lab-chart-key"><span class="lab-key-item"><i class="lab-key lab-key-dot"></i>탐색 후보</span><span class="lab-key-item"><i class="lab-key lab-key-front"></i>Pareto 해</span><span class="lab-key-item">× 기준 경로</span><span class="lab-key-item">◆ 현재 정책</span></span>
+                                </div>
+                                <div class="lab-obj-wrap"><canvas class="lab-obj-canvas" role="img" aria-label="개념 모델의 목적 공간. 가로축 J1 최대 노출, 세로축 J2 연료, 모두 기준 경로 대비. Pareto 해를 누르면 지도에 표시된다."></canvas></div>
+                                <p class="lab-hint">무작위 탐색으로 근사한 개념적 Pareto 해이며, 논문의 qLogEHVI 기반 MOBO가 아니다. Pareto 해를 누르면 해당 경로와 속도 분포가 지도에 표시된다.</p>
+                            </div>
+
+                            <aside class="lab-panel" aria-label="경로 및 속도 정책">
+                                <fieldset class="lab-group">
+                                    <legend class="lab-group-title">목적함수 (기준 경로 대비)</legend>
+                                    <div class="lab-objbar"><span>J<sub>1</sub> 최대 노출</span><i data-bar="j1"></i></div>
+                                    <div class="lab-objbar"><span>J<sub>2</sub> 연료</span><i data-bar="j2"></i></div>
+                                    <p class="lab-hint lab-obj-text"></p>
+                                </fieldset>
+                                <fieldset class="lab-group">
+                                    <legend class="lab-group-title">속도 분포 v(τ)</legend>
+                                    <div class="lab-speed-wrap"><canvas class="lab-speed-canvas" aria-label="Bézier 속도 분포 편집기"></canvas></div>
+                                    <p class="lab-hint">제어점(5개)을 위아래로 끌어 속도 분포를 바꾼다. 점선은 경제 속도(기준)이다.</p>
+                                </fieldset>
+                                <div class="lab-group">
+                                    <p class="lab-group-title">정책</p>
+                                    <div class="lab-actions">
+                                        <button class="lab-btn" type="button" data-act="search">Pareto 탐색</button>
+                                        <button class="lab-btn" type="button" data-act="baseline">기준 경로</button>
+                                    </div>
+                                    <p class="lab-hint">지도의 경로 제어점 1–3을 끌어 경로를 바꾼다.</p>
+                                </div>
+                            </aside>
+                        </div>
+
+                        <div class="lab-paper">
+                            <div class="lab-paper-head">
+                                <h3 class="lab-card-title">논문 결과</h3>
+                                <span class="lab-paper-cond" data-inflow-text="south">부산항 인근 사례, 남풍 유입 · 기준 경로 J<sub>1</sub> = 0.2653, J<sub>2</sub> = 0.7526 · Pareto 해 9개 (Table 2(a))</span>
+                                <span class="lab-paper-cond" data-inflow-text="east" hidden>부산항 인근 사례, 동풍 유입 · 기준 경로 J<sub>1</sub> = 0.4255, J<sub>2</sub> = 0.7526 · Pareto 해 6개 (Table 2(b))</span>
+                            </div>
+                            <div class="lab-paper-split">
+                                <div class="lab-pareto-wrap"><canvas class="lab-pareto-canvas" role="img" aria-label="논문 Table 2의 Pareto 해 산점도"></canvas></div>
+                                <div class="lab-paper-grid lab-paper-grid-2" data-inflow-text="south">
+                                    <div class="lab-metric"><span class="lab-metric-value">+28.2%</span><span class="lab-metric-label">Hypervolume 개선</span></div>
+                                    <div class="lab-metric"><span class="lab-metric-value">78.5%</span><span class="lab-metric-label">최대 노출 감소 (해 8, 연료 +44.6%)</span></div>
+                                    <div class="lab-metric"><span class="lab-metric-value">52.6%</span><span class="lab-metric-label">최대 노출 감소 (해 3, 연료 +3.5%)</span></div>
+                                    <div class="lab-metric"><span class="lab-metric-value">21.3% · 3.5%</span><span class="lab-metric-label">노출 감소 · 연료 절감 동시 달성 (해 6)</span></div>
+                                </div>
+                                <div class="lab-paper-grid lab-paper-grid-2" data-inflow-text="east" hidden>
+                                    <div class="lab-metric"><span class="lab-metric-value">+29.5%</span><span class="lab-metric-label">Hypervolume 개선</span></div>
+                                    <div class="lab-metric"><span class="lab-metric-value">74.2%</span><span class="lab-metric-label">최대 노출 감소 (해 3, 연료 +11.4%)</span></div>
+                                    <div class="lab-metric"><span class="lab-metric-value">≈ 1.9배</span><span class="lab-metric-label">남풍 대비 최소 노출 하한 (J<sub>1</sub> 0.110 vs 0.057)</span></div>
+                                    <div class="lab-metric"><span class="lab-metric-value">14.8% · 1.3%</span><span class="lab-metric-label">노출 감소 · 연료 절감 동시 달성 (해 6)</span></div>
+                                </div>
+                            </div>
+                            <p class="lab-note">산점도의 점은 논문 Table 2의 Pareto 해이며, 주황색은 두 목적함수를 모두 개선한 해이다. 개념 모델은 균일 유입류와 와류열로 구성한 배경 유동, 속도의 세제곱에 비례하는 배출, 가우시안 퍼프(puff)의 이류·확산으로 구성하였다. 출처: J. Yun, S. Park, and D. Kim, <a href="https://doi.org/10.1016/j.oceaneng.2026.126293" target="_blank" rel="noopener">Ocean Engineering 362, 126293 (2026)</a>.</p>
+                        </div>
+
+                        <template data-caption="problem">선박은 출발점에서 도착점까지 운항하며 속도의 세제곱에 비례하는 오염물질을 배출하고, 배출된 오염물질은 배경 유동을 따라 이류·확산한다. 첫째 목적함수 J<sub>1</sub>은 보호구역 Ω<sub>P</sub> 내 최대 농도, 둘째 목적함수 J<sub>2</sub>는 속도의 세제곱과 보조 부하 항으로 구성한 연료 소비 대리 지표이다. 기준 경로는 경제 속도로 직진하는 연료 최적 운항이다.</template>
+                        <template data-caption="sensing">국지 유동은 균일 간격의 희소 센서(속도·압력)로 측정된다. PI-E-DON은 희소 입력을 16차원 잠재 벡터로 압축하고, 물리 잔차를 포함한 학습으로 고해상도 유동장을 복원한다. 논문은 Re = 100 원형 실린더 후류 자료로 학습·검증하였으며, 센서 간격이 넓을수록(Δ<sub>c</sub>/d ≥ 1.5) PI-E-DON의 개선 효과가 두드러졌다.</template>
+                        <template data-caption="design">경로와 속도 분포는 정규화된 궤적 변수 τ ∈ [0, 1]에 대한 4차 Bézier 곡선(제어점 5개, 시작점·끝점 고정)으로 매개화된다. 경로 제어점과 속도 제어점을 조정하면 배출 위치와 시점, 배출량이 함께 변한다.</template>
+                        <template data-caption="pareto">목적 공간의 점은 탐색한 후보 정책이며, 청록 곡선은 두 목적함수에 대해 서로 우월하지 않은 Pareto 해이다. 논문은 독립 가우시안 과정 대리 모델과 qLogEHVI 획득 함수를 사용한 MOBO로 부산항 인근 사례(남풍)에서 hypervolume을 28.2% 개선하였고, 최대 노출을 최대 78.5% 감소시켰다.</template>
+                        <template data-caption="explore">경로와 속도 분포를 조정하여 노출–연료 상충 관계를 비교한다. 논문에서 직선·장애물 회피 사례의 노출 감소는 주로 경로 우회에 의해 달성되었고, 부산항 인근 사례에서는 경로 편향과 속도 조절의 조합이 주된 개선을 가져왔다. 유입 풍향에 따라 달성 가능한 최소 노출이 약 1.9배 달랐다.</template>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-section detail-section-alt">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Background</span>
+                    <h2 class="section-title">총배출량이 아닌 최대 노출의 저감</h2>
+                    <p class="section-subtitle">보호구역의 급성 대기질 악화는 총배출량보다 배출 플룸과 국지 기상의 시공간적 정렬에 의해 결정된다.</p>
+                </div>
+                <div class="detail-section-grid">
+                    <article class="detail-card">
+                        <h3 class="detail-card-title">문제 배경</h3>
+                        <p>부산에서 선박은 초미세먼지(PM<sub>2.5</sub>) 배출의 약 51.4%를 차지하는 최대 배출원으로 보고되었다. 기존 저감 전략은 저속 운항으로 총배출량을 줄이는 데 초점을 두어 운항 시간을 늘리며, 불리한 바람 조건에서 발생하는 최대 농도를 직접 다루지 못한다.</p>
+                        <p>본 연구는 운항의 시간 차원을 활용하여, 국지 바람 조건에 맞춰 경로와 속도 분포를 조정함으로써 연료 소비와 보호구역 최대 노출을 동시에 줄이는 방법을 제시하였다.</p>
+                    </article>
+                    <article class="detail-card">
+                        <h3 class="detail-card-title">의사결정 지원 틀</h3>
+                        <p>오프라인 단계에서 대리 모델을 학습하고, 온라인 단계에서 (1) 희소 센싱, (2) PI-E-DON 기반 유동장 복원, (3) 오염물질 확산 해석, (4) MOBO 기반 의사결정을 수행한다.</p>
+                        <ul class="detail-list">
+                            <li>J<sub>1</sub>: 보호구역 최대 농도 — 단기 대기질 기준과 부합하는 지표(누적 노출과 상관계수 r &gt; 0.92)</li>
+                            <li>J<sub>2</sub>: 속도의 세제곱(Admiralty 관계)과 보조 부하 항으로 구성한 연료 소비 대리 지표</li>
+                            <li>후보 평가 1회 약 2–3 s, 200회 반복 약 10분(RTX 4090 1대) — 준실시간 의사결정 지원</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-section" id="figures">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Key Figures</span>
+                    <h2 class="section-title">의사결정 틀, 유동장 복원 및 부산항 인근 사례</h2>
+                </div>
+                <div class="detail-figure-grid">
+                    <figure class="detail-figure-card wide">
+                        <img src="../../assets/research/mobo-port-optimization/decision-support-framework.jpg" alt="Schematic of the proposed decision-support framework with offline and online phases" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">제안한 의사결정 지원 틀. 오프라인 단계(대리 모델 학습)와 온라인 단계((1) 희소 센싱, (2) 유동장 대리 모델, (3–4) 확산 목적함수를 평가하며 운항 매개변수를 갱신하는 내부 최적화 루프)로 구성된다. Fig. 2.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card wide">
+                        <img src="../../assets/research/mobo-port-optimization/pi-e-don-architecture.jpg" alt="PI-E-DON architecture with encoder, branch and trunk networks" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">PI-E-DON 구조. 희소 센싱 자료 (u<sub>s</sub>, v<sub>s</sub>, p<sub>s</sub>)를 인코더로 잠재 벡터에 압축하여 branch network에 입력하고, trunk network는 시공간 질의점 (x, y, t)를 받는다. Fig. 4.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card">
+                        <img src="../../assets/research/mobo-port-optimization/dispersion-validation-reference-vs-pi-e-don-vs-e-don.jpg" alt="Pollutant concentration fields for the reference solution, PI-E-DON-driven dispersion and E-DON-driven dispersion" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">확산 검증: 정규화된 오염물질 농도와 속도 벡터(tu<sub>∞</sub>/d = 0–6, 초기 플룸 위치 2가지). (a, d) 기준 해, (b, e) PI-E-DON 기반 확산, (c, f) E-DON 기반 확산. Fig. 6.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card">
+                        <img src="../../assets/research/mobo-port-optimization/busan-objective-space-pareto-scatter.jpg" alt="Objective-space scatter of J1 versus J2 for the Busan case under southerly and easterly inflow" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">부산항 인근 사례의 목적 공간(J<sub>1</sub> 최대 노출 vs J<sub>2</sub> 연료): (a) 남풍 유입, (b) 동풍 유입. 기준 경로, MOBO 평가점, Pareto 해를 표시하였다. Fig. 13.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card">
+                        <img src="../../assets/research/mobo-port-optimization/busan-representative-trajectories-speed-profiles.jpg" alt="Representative Busan-case trajectories and speed profiles under southerly and easterly inflow" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">부산항 인근 사례의 대표 해(기준, 최소 노출, 최소 연료, knee)의 경로(상)와 속도 분포 v<sub>ship</sub>(τ)(하): (a) 남풍, (b) 동풍 유입. Fig. 14.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card">
+                        <img src="../../assets/research/mobo-port-optimization/busan-southerly-pollutant-fields-baseline-vs-pareto.jpg" alt="Pollutant concentration fields for the Busan case under southerly inflow for baseline and representative Pareto solutions" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">남풍 유입 부산항 인근 사례의 오염물질 농도장(t<sup>*</sup> = 1.5, 3.0, 4.5, 6.0): 기준, 최소 노출, 최소 연료, knee 해. Fig. 15.</figcaption>
+                    </figure>
+                </div>
+                <p class="detail-figure-credit">그림: J. Yun, S. Park, and D. Kim, Ocean Engineering 362 (2026) 126293 — 저자 원고(author manuscript) 판본.</p>
+            </div>
+        </section>
+
+        <section class="detail-section detail-section-alt" id="results">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Main Results</span>
+                    <h2 class="section-title">시나리오별 MOBO 결과</h2>
+                    <p class="section-subtitle">감소율은 시나리오별 기준 경로 대비, hypervolume 개선은 초기 설계 집합 대비 값이다 (Table 1).</p>
+                </div>
+                <div class="detail-result-grid detail-result-grid-4">
+                    <div class="detail-result-card">
+                        <span class="detail-result-value">+20.5% · 66.4%</span>
+                        <span class="detail-result-label">Straight-line case: hypervolume · peak-exposure reduction</span>
+                    </div>
+                    <div class="detail-result-card">
+                        <span class="detail-result-value">+34.9% · 34.0%</span>
+                        <span class="detail-result-label">Obstacle-avoidance case</span>
+                    </div>
+                    <div class="detail-result-card">
+                        <span class="detail-result-value">+28.2% · 78.5%</span>
+                        <span class="detail-result-label">Busan Port vicinity, southerly inflow</span>
+                    </div>
+                    <div class="detail-result-card">
+                        <span class="detail-result-value">+29.5% · 74.2%</span>
+                        <span class="detail-result-label">Busan Port vicinity, easterly inflow</span>
+                    </div>
+                </div>
+                <article class="detail-card">
+                    <h3 class="detail-card-title">해석</h3>
+                    <p>직선 사례의 기준 경로는 이미 연료 최적이므로 Pareto 해는 주로 J<sub>1</sub> 방향으로 분포하였으며, 직선·장애물 회피 사례의 노출 감소는 주로 공간적 우회에 의해 달성되고 속도 조절은 부차적이었다. 부산항 인근 사례에서는 경로 편향과 속도 조절을 조합한 해가 통항 제한 구역을 지키면서 노출을 줄였다.</p>
+                    <p>두 유입 풍향에서 hypervolume 개선은 비슷하였으나(+28.2%, +29.5%), 최적화 후 최소 노출은 약 1.9배 차이를 보여(J<sub>1</sub> = 0.057, 0.110) 풍향이 달성 가능한 노출의 하한을 결정함을 확인하였다. 노출 감소와 연료 절감을 동시에 달성한 해는 이상화된 개념 검증 결과이며, 현장 규모의 검증이 필요하다.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="detail-section" id="outputs">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Related Outputs</span>
+                    <h2 class="section-title">논문 및 발표</h2>
+                </div>
+                <div class="detail-related-list">
+                    <article class="detail-related-item">
+                        <span class="detail-related-meta">Journal</span>
+                        <h3>Ocean Engineering 2026</h3>
+                        <p>J. Yun, S. Park, and D. Kim, "Physics-informed multi-objective optimization for fuel consumption and air-pollutant exposure in ship operations," <em>Ocean Engineering</em>, 362, 126293, 2026. <a href="https://doi.org/10.1016/j.oceaneng.2026.126293" target="_blank" rel="noopener">doi:10.1016/j.oceaneng.2026.126293</a></p>
+                    </article>
+                    <article class="detail-related-item">
+                        <span class="detail-related-meta">Conference</span>
+                        <h3>APS DFD 2024 · MIC 2024</h3>
+                        <p>Real-time prediction of turbulent flow using physics-informed neural networks with coarse spatiotemporal data (Salt Lake City, 2024.11) · Physics-informed neural networks for real-time prediction as a surrogate model for optimization (Busan, 2024.10).</p>
+                    </article>
+                    <article class="detail-related-item">
+                        <span class="detail-related-meta">Conference</span>
+                        <h3>대한기계학회 2024</h3>
+                        <p>국소 성긴 센서를 이용한 DeepONet 기반 원형 실린더 주위 층류 유동의 후류 예측 (2024.11, 구두 발표).</p>
+                    </article>
+                </div>
+                <div class="detail-pager">
+                    <a href="../../index.html#highlights" class="detail-pager-link">
+                        <small>Back</small>
+                        <span>Research Highlights</span>
+                    </a>
+                    <a href="../kiln-surrogate/index.html" class="detail-pager-link">
+                        <small>Next Research</small>
+                        <span>소성로 3차원 대리 모델</span>
+                    </a>
+                    <a href="../../index.html#contact" class="detail-pager-link">
+                        <small>Contact</small>
+                        <span>연구 및 협업 문의</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../../js/main.js?v=2026q3"></script>
+    <script type="module" src="../../js/lab/port.js?v=2026q3"></script>
+</body>
+</html>

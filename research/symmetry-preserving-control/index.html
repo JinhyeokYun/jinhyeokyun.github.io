@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대칭성 보장 신경망 제어 | 윤진혁</title>
+    <meta name="description" content="벽 압력으로부터 센싱 속도를 예측하는 평면 대칭성 보장 신경망(FCNN-PS)과 이를 이용한 원형 실린더 주위 층류 및 난류 유동의 기계학습 기반 비례 제어">
+    <meta name="color-scheme" content="light dark">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/style.css?v=2026q3">
+</head>
+<body class="research-detail-page">
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="../../index.html#hero" class="nav-logo">JH Yun</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../../index.html#highlights" class="nav-link">Home</a></li>
+                <li><a href="#overview" class="nav-link active">Overview</a></li>
+                <li><a href="#explore" class="nav-link">Model</a></li>
+                <li><a href="#figures" class="nav-link">Figures</a></li>
+                <li><a href="#results" class="nav-link">Results</a></li>
+                <li><a href="#outputs" class="nav-link">Related</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="detail-main">
+        <section class="detail-hero-section" id="overview">
+            <div class="container">
+                <div class="detail-breadcrumb">Research Highlight D</div>
+                <div class="detail-hero-grid">
+                    <div class="detail-hero-copy">
+                        <span class="detail-kicker">Symmetry-Preserving Neural Control</span>
+                        <h1 class="detail-title">대칭성을 보장하는 신경망 기반 원형 실린더 주위 층류 및 난류 유동 제어</h1>
+                        <p class="detail-summary">기존 비례 되먹임 제어(proportional feedback control)는 후류 중심선의 수직 방향(transverse) 센싱 속도를 사용한다. 본 연구는 제어의 실용성을 높이기 위해 실린더 벽 압력으로부터 센싱 속도를 예측하는 인공신경망을 구성하고, 그 예측값을 이용한 기계학습 기반 비례 제어(machine-learning-based proportional control, MLP control)를 수행하였다. 원형 실린더 주위 유동이 중심면에 대해 평면 대칭성(planar symmetry)을 가진다는 점에 착안하여, 바이어스(bias)를 제거하고 모든 층을 odd function으로 구성한 FCNN-PS를 제안하였다.</p>
+                        <div class="detail-keywords">
+                            <span class="detail-keyword">FCNN-PS</span>
+                            <span class="detail-keyword">Planar Symmetry</span>
+                            <span class="detail-keyword">MLP Control</span>
+                            <span class="detail-keyword">Wall-Pressure Sensing</span>
+                            <span class="detail-keyword">Re = 60 · 3900</span>
+                        </div>
+                        <div class="detail-stat-grid">
+                            <div class="detail-stat-card">
+                                <span class="detail-stat-value">완전 제거</span>
+                                <span class="detail-stat-label">Kármán vortex shedding at Re = 60</span>
+                            </div>
+                            <div class="detail-stat-card">
+                                <span class="detail-stat-value">−11.5%</span>
+                                <span class="detail-stat-label">Mean drag C<sub>D</sub> at Re = 3900</span>
+                            </div>
+                            <div class="detail-stat-card">
+                                <span class="detail-stat-value">−67.2%</span>
+                                <span class="detail-stat-label">Lift fluctuations C<sub>L,rms</sub> at Re = 3900</span>
+                            </div>
+                        </div>
+                        <div class="detail-actions">
+                            <a href="#explore" class="btn btn-primary"><i class="fas fa-project-diagram"></i> 개념 모델</a>
+                            <a href="../../index.html#highlights" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Highlights로 돌아가기</a>
+                        </div>
+                    </div>
+                    <figure class="detail-hero-figure">
+                        <img src="../../assets/research/symmetry-preserving-control/mlp-control-loop.jpg" alt="Schematic of machine-learning-based proportional control with guaranteed planar symmetry: learning process and control process" class="detail-hero-image" loading="eager" decoding="async">
+                        <figcaption class="detail-hero-caption">(a) 학습 과정: 비례 제어 수행 중 상·하면 벽 압력의 차 p⁻<sub>w</sub>와 센싱 속도 v<sub>s</sub>를 수집한다. (b) 제어 과정: 학습된 신경망이 p⁻<sub>w</sub>(t)로부터 v<sub>s</sub><sup>pred</sup>(t)를 예측하고, 이를 비례 제어에 사용한다. 박사학위 논문 Figure 3.2.</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-section lab-section" id="explore" aria-labelledby="explore-title">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Conceptual Model</span>
+                    <h2 class="section-title" id="explore-title">평면 대칭성 보장 신경망 기반 비례 되먹임 제어</h2>
+                    <p class="section-subtitle">평면 대칭 변환(y → −y)에 대한 신경망 출력의 대칭성과 폐쇄 루프(closed-loop) 제어 거동을 개념 모델로 나타낸다. 유동과 신경망은 개념적 재현이며, 수치는 논문 결과를 따른다.</p>
+                </div>
+
+                <div class="lab" data-lab="symmetry">
+                    <figure class="lab-fallback">
+                        <img src="../../assets/research/symmetry-preserving-control/network-fcnn-vs-fcnn-ps.jpg" alt="Comparison between a conventional fully-connected neural network and the fully-connected neural network with guaranteed planar symmetry" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">개념 모델은 JavaScript 환경에서 표시된다. 위 그림은 일반 FCNN(a)과 FCNN-PS(b)의 구조 비교이다(박사학위 논문 Figure 3.4).</figcaption>
+                    </figure>
+
+                    <div class="lab-live" hidden>
+                        <div class="lab-toolbar">
+                            <div class="lab-steps" role="tablist" aria-label="설명 단계">
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-sym"><span class="lab-step-num">1</span>평면 대칭성</button>
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-sym"><span class="lab-step-num">2</span>일반 FCNN</button>
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-sym"><span class="lab-step-num">3</span>FCNN-PS</button>
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-sym"><span class="lab-step-num">4</span>폐쇄 루프 제어</button>
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-sym"><span class="lab-step-num">5</span>조건 비교</button>
+                            </div>
+                            <div class="lab-transport">
+                                <div class="lab-seg" role="radiogroup" aria-label="유동 조건">
+                                    <label><input type="radio" name="lab-regime" value="turbulent" checked><span>난류 Re = 3900</span></label>
+                                    <label><input type="radio" name="lab-regime" value="laminar60"><span>층류 Re = 60</span></label>
+                                </div>
+                                <button class="lab-btn" type="button" data-act="play" aria-label="애니메이션 일시정지">일시정지</button>
+                                <button class="lab-btn" type="button" data-act="reset">초기화</button>
+                            </div>
+                        </div>
+
+                        <div class="lab-stage" id="lab-stage-sym" role="tabpanel" aria-label="개념 모델 화면">
+                            <div class="lab-canvas-wrap">
+                                <canvas class="lab-canvas" role="img" aria-label="원형 실린더 후류와 벽 압력 센서의 개념 애니메이션"></canvas>
+                                <span class="lab-badge">개념 모델 · 논문 계산 결과 아님</span>
+                                <div class="lab-legend" aria-hidden="true"><span>−ω<sub>z</sub></span><i class="lab-colorbar"></i><span>+ω<sub>z</sub></span></div>
+                                <span class="lab-alert" hidden>평균 양력 편향</span>
+                                <span class="lab-debug" hidden></span>
+                            </div>
+                            <p class="lab-caption"></p>
+                            <p class="lab-sr" aria-live="polite"></p>
+                        </div>
+
+                        <div class="lab-body">
+                            <div class="lab-chart-card">
+                                <div class="lab-chart-head">
+                                    <h3 class="lab-card-title">시간 이력</h3>
+                                    <span class="lab-chart-key"><span class="lab-key-item"><i class="lab-key lab-key-raw"></i>실제 v<sub>s</sub></span><span class="lab-key-item"><i class="lab-key lab-key-avg"></i>예측 v<sub>s</sub><sup>pred</sup></span><span class="lab-key-item"><i class="lab-key lab-key-env"></i>비제어 유동 진폭</span><span class="lab-key-item"><i class="lab-key lab-key-ramp"></i>제어 개시 구간</span></span>
+                                </div>
+                                <div class="lab-chart-wrap"><canvas class="lab-chart" role="img" aria-label="실제 및 예측 센싱 속도, 대칭 오차, 가진 속도, 양력 계수의 시간 이력 (개념 모델)"></canvas></div>
+                            </div>
+
+                            <aside class="lab-panel" aria-label="신경망 및 제어 조건">
+                                <button class="lab-btn lab-toggle lab-toggle-main" type="button" data-param="control" aria-pressed="false"><i class="fas fa-power-off" aria-hidden="true"></i> 제어</button>
+
+                                <fieldset class="lab-group">
+                                    <legend class="lab-group-title">신경망 구조</legend>
+                                    <div class="lab-seg" role="radiogroup" aria-label="신경망 구조">
+                                        <label><input type="radio" name="lab-net" value="conv"><span>일반 FCNN</span></label>
+                                        <label><input type="radio" name="lab-net" value="ps" checked><span>FCNN-PS</span></label>
+                                    </div>
+                                    <div>
+                                        <p class="lab-net-title"></p>
+                                        <div class="lab-net-wrap"><canvas class="lab-net-canvas" aria-hidden="true"></canvas></div>
+                                    </div>
+                                    <p class="lab-hint">가중치는 임의로 생성한 값이며, 학습된 신경망이 아닌 구조적 성질을 나타낸다.</p>
+                                </fieldset>
+
+                                <fieldset class="lab-group">
+                                    <legend class="lab-group-title">대칭성 검사</legend>
+                                    <div class="lab-sym">
+                                        <div class="lab-sym-row"><span>F(x) + F(x̃)</span><span class="lab-sym-value">0.000</span></div>
+                                        <div class="lab-sym-bar" aria-hidden="true"></div>
+                                        <p class="lab-sym-text"></p>
+                                    </div>
+                                    <div class="lab-actions">
+                                        <button class="lab-btn" type="button" data-act="mirror">평면 대칭 변환</button>
+                                        <button class="lab-btn" type="button" data-act="shuffle">가중치 재생성</button>
+                                    </div>
+                                    <p class="lab-hint">x̃는 평면 대칭 변환(y → −y)을 적용한 유동에서 얻은 입력이다.</p>
+                                </fieldset>
+                            </aside>
+                        </div>
+
+                        <div class="lab-paper">
+                            <div class="lab-paper-head">
+                                <h3 class="lab-card-title">논문 결과</h3>
+                                <span class="lab-paper-cond" data-regime-text="turbulent">LES, Re = 3900 · 입력 8(10–40°, 110–140°) · 은닉층 2개 × 노드 8개 · x<sub>s</sub>/d = 1.69, T<sub>a</sub>u<sub>∞</sub>/d = 1.44, α = 0.01</span>
+                                <span class="lab-paper-cond" data-regime-text="laminar60" hidden>2D, Re = 60 · 입력 6 · 은닉층 1개 × 노드 4개 · x<sub>s</sub>/d = 1.0, α = −0.2, T<sub>a</sub>u<sub>∞</sub>/d = 0.12</span>
+                            </div>
+                            <div class="lab-paper-grid" data-regime-text="turbulent">
+                                <div class="lab-metric"><span class="lab-metric-value">−11.5%</span><span class="lab-metric-label">평균 항력 C<sub>D</sub></span></div>
+                                <div class="lab-metric"><span class="lab-metric-value">−67.2%</span><span class="lab-metric-label">양력 섭동 C<sub>L,rms</sub></span></div>
+                                <div class="lab-metric"><span class="lab-metric-value">0.95</span><span class="lab-metric-label">예측 상관계수 (a priori test)</span></div>
+                                <div class="lab-metric"><span class="lab-metric-value">0.90</span><span class="lab-metric-label">제어 중 예측 상관계수 (a posteriori test)</span></div>
+                            </div>
+                            <div class="lab-paper-grid" data-regime-text="laminar60" hidden>
+                                <div class="lab-metric"><span class="lab-metric-value">완전 소멸</span><span class="lab-metric-label">센싱 속도·양력 섭동, Kármán 보텍스 쉐딩</span></div>
+                                <div class="lab-metric"><span class="lab-metric-value">P 제어와 동일</span><span class="lab-metric-label">항력 감소량 (기존 P 제어 7.3%, Son et al. 2011)</span></div>
+                                <div class="lab-metric"><span class="lab-metric-value">&lt; 10<sup>−6</sup></span><span class="lab-metric-label">예측 평균제곱오차 E (입력 4개 이상)</span></div>
+                                <div class="lab-metric"><span class="lab-metric-value">발산</span><span class="lab-metric-label">일반 FCNN 예측값을 이용한 제어</span></div>
+                            </div>
+                            <p class="lab-note">유동은 <a href="../proportional-feedback-control/index.html">비례 되먹임 제어 페이지</a>와 동일한 개념 모델(Stuart–Landau oscillator)로 나타내었다. 신경망 도식은 임의 가중치로 구성한 구조 예시이며, 제어에 사용한 예측값은 실제 신호에 오차를 부가하여 모사하였다. 수치는 모두 논문 값이다. 출처: 윤진혁, <em>Machine-Learning-Based Proportional Control and Unsteady Distributed Forcing of Turbulent Flow over a Circular Cylinder</em>, 아주대학교 박사학위 논문, 2023, Part III.</p>
+                        </div>
+
+                        <template data-caption="symmetry">원형 실린더 주위 유동은 중심면(y = 0)에 대해 평면 대칭성(planar symmetry)을 가진다. 평면 대칭 변환(y → −y)에서 수직 방향 센싱 속도 v<sub>s</sub>는 부호가 반전되는 반면, 벽 압력 p<sub>w</sub>는 상·하면의 값이 교환될 뿐 부호가 반전되지 않는다. 따라서 상·하면 벽 압력의 차 p⁻<sub>w</sub> = p<sup>U</sup><sub>w</sub> − p<sup>L</sup><sub>w</sub>를 신경망 입력으로 사용한다. 원형 표지는 벽 압력 센서 위치(전면 10–40°, 후면 110–140°)이다.</template>
+                        <template data-caption="symmetry-laminar60">원형 실린더 주위 유동은 중심면(y = 0)에 대해 평면 대칭성(planar symmetry)을 가진다. 평면 대칭 변환(y → −y)에서 수직 방향 센싱 속도 v<sub>s</sub>는 부호가 반전되는 반면, 벽 압력 p<sub>w</sub>는 상·하면의 값이 교환될 뿐 부호가 반전되지 않는다. 따라서 상·하면 벽 압력의 차 p⁻<sub>w</sub> = p<sup>U</sup><sub>w</sub> − p<sup>L</sup><sub>w</sub>를 신경망 입력으로 사용한다. 원형 표지는 가진 슬롯을 제외한 구간에 등간격으로 배치한 벽 압력 센서 6개이다.</template>
+                        <template data-caption="conventional">일반적인 완전 연결 신경망(fully-connected neural network, FCNN)은 상·하면 벽 압력을 각각 입력으로 받고 바이어스 b를 가진다. 이 구조에서는 평면 대칭 변환에 대해 출력의 부호가 정확히 반전되지 않는다. 논문(Re = 60)에서 FCNN의 예측값은 매우 작은 정상상태 오차(steady-state error)를 보였으며, 이를 이용한 제어는 서서히 발산하였다. 화면은 이 오차가 폐쇄 루프에서 증폭되어 평균 양력이 편향되는 과정을 개념적으로 나타낸다.</template>
+                        <template data-caption="fcnnps">FCNN-PS(fully-connected neural network with guaranteed planar-symmetry)는 p⁻<sub>w</sub>를 입력으로 하고 바이어스를 사용하지 않으며, odd function인 tanh 활성화 함수와 평균 이동 항을 제거한 batch normalization(BN-PS)을 적용한다. 모든 층이 odd function이므로 가중치와 무관하게 F(−x) = −F(x)가 성립한다.</template>
+                        <template data-caption="loop">FCNN-PS가 벽 압력으로부터 예측한 센싱 속도 v<sub>s</sub><sup>pred</sup>(청록)를 비례 제어 법칙 ψ = α·e(t)에 사용한다. 회색은 실제 센싱 속도이다. Re = 3900 LES에서 평균 항력과 양력 섭동은 각각 11.5%, 67.2% 감소하였으며, 제어 중 예측값의 상관계수는 0.90이었다.</template>
+                        <template data-caption="loop-laminar60">FCNN-PS가 벽 압력으로부터 예측한 센싱 속도 v<sub>s</sub><sup>pred</sup>(청록)를 비례 제어 법칙 ψ = α·e(t)에 사용한다. 회색은 실제 센싱 속도이다. Re = 60에서 센싱 속도와 양력 섭동이 완전히 소멸하고 Kármán 보텍스 쉐딩이 제거되었으며, 항력 감소량은 기존 비례 제어와 동일한 수준이었다.</template>
+                        <template data-caption="explore">신경망 구조, 평면 대칭 변환, 제어 여부의 조합에 따른 거동을 비교한다. FCNN-PS의 대칭 오차는 가중치와 무관하게 0으로 유지된다.</template>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-section detail-section-alt">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Background</span>
+                    <h2 class="section-title">예측 성능과 제어 성능의 괴리</h2>
+                    <p class="section-subtitle">사전 검증(a priori test)의 예측 정확도가 높더라도, 예측값을 이용한 제어(a posteriori test)의 성공이 보장되지는 않는다.</p>
+                </div>
+                <div class="detail-section-grid">
+                    <article class="detail-card">
+                        <h3 class="detail-card-title">문제 배경</h3>
+                        <p>원형 실린더의 비례 제어에서는 순간 유동장 하나로부터 센싱 속도 하나만을 얻는다. 한 유동장에서 다수의 학습 데이터를 얻을 수 있는 난류 채널 유동과 달리, 동일한 규모의 데이터를 확보하는 데 필요한 계산 비용이 크다.</p>
+                        <p>또한 테스트 데이터에 대한 예측 성능이 우수하더라도, 예측값으로 실제 제어를 수행하면 충분한 성능을 얻지 못할 수 있다. Re = 60에서 비제어 유동만으로 학습한 신경망과 일반 FCNN은 모두 제어가 발산하였다.</p>
+                    </article>
+                    <article class="detail-card">
+                        <h3 class="detail-card-title">평면 대칭성의 구조적 보장</h3>
+                        <p>평면 대칭 변환(y → −y)에서 센싱 속도는 −v<sub>s</sub>, 상·하면 벽 압력의 차는 −p⁻<sub>w</sub>가 된다. 따라서 신경망 F가 odd function, 즉 F(−x) = −F(x)이면 예측값 역시 동일한 대칭성을 만족한다.</p>
+                        <ul class="detail-list">
+                            <li>입력: 벽 압력 p<sub>w</sub> 대신 상·하면 차 p⁻<sub>w</sub> 사용 — 평균이 0이며 대칭 변환에서 부호가 반전됨</li>
+                            <li>구조: 바이어스 제거, tanh 활성화 함수, 평균 이동 항을 제거한 BN-PS</li>
+                            <li>데이터: 비례 게인 α(t)를 무작위로 변화시켜 비제어·천이·제어 구간을 함께 수집(Re = 60), 서로 다른 초기장에서 비례 제어 20회 수행(Re = 3900)</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-section" id="figures">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Key Figures</span>
+                    <h2 class="section-title">신경망 구조, 예측 성능 및 제어 결과</h2>
+                </div>
+                <div class="detail-figure-grid">
+                    <figure class="detail-figure-card">
+                        <img src="../../assets/research/symmetry-preserving-control/planar-symmetry-concept.jpg" alt="Instantaneous vortical structures of the uncontrolled wake at Re = 3900 and the same snapshot after the planar-symmetry transformation" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">(a) Re = 3900 비제어 유동의 순간 와류 구조(λ<sub>2</sub> 기법, x–y 평면), (b) 동일한 순간장에 평면 대칭 변환(y → −y)을 적용한 결과. 변환에 따라 p⁻<sub>w</sub> → −p⁻<sub>w</sub>, v<sub>s</sub> → −v<sub>s</sub>가 된다. 박사학위 논문 심사 발표 자료.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card">
+                        <img src="../../assets/research/symmetry-preserving-control/network-fcnn-vs-fcnn-ps.jpg" alt="Comparison between a conventional fully-connected neural network and FCNN-PS" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">(a) 일반 FCNN: 상·하면 벽 압력 p<sup>U</sup><sub>w</sub>, p<sup>L</sup><sub>w</sub>를 개별 입력으로 받으며 바이어스 b<sub>1</sub>, b<sub>2</sub>를 가진다. (b) FCNN-PS: 압력 차 p⁻<sub>w</sub>만을 입력으로 받으며 바이어스가 없다. Figure 3.4.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card wide">
+                        <img src="../../assets/research/symmetry-preserving-control/preliminary-evaluation-re60.jpg" alt="Predicted and true sensing velocity at Re = 60 for FCNN-PS trained with and without controlled data and for a conventional FCNN" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">Re = 60 사전 평가: 실제 v<sub>s</sub><sup>true</sup>(검정)와 예측 v<sub>s</sub><sup>pred</sup>(녹색 점선). (a, c) 비제어·비례 제어 데이터로 학습한 FCNN-PS, (b) 비제어 데이터만으로 학습한 FCNN-PS — 제어 개시 후 천이 구간에서 센싱 속도를 과대 예측한다, (d) 일반 FCNN — 제어 구간에서 작은 정상상태 오차가 남는다. Figure 4.2.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card">
+                        <img src="../../assets/research/symmetry-preserving-control/mlp-control-vorticity-re60.jpg" alt="Instantaneous spanwise vorticity at Re = 60 without control and with MLP control using FCNN-PS" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">Re = 60 순간 와도장: (a) 비제어, (b) FCNN-PS(입력 6, 은닉층 1개, 노드 4개)를 이용한 MLP control(α = −0.2, T<sub>a</sub>u<sub>∞</sub>/d = 0.12). Kármán 보텍스 쉐딩이 완전히 제거되고 후류가 안정화된다. Figure 4.5.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card">
+                        <img src="../../assets/research/symmetry-preserving-control/prediction-scatter-re3900.jpg" alt="Scatter plots of predicted versus true sensing velocity at Re = 3900 in the a priori and a posteriori tests" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">Re = 3900에서 v<sub>s</sub><sup>true</sup>와 v<sub>s</sub><sup>pred</sup>의 산점도: (a) 테스트 데이터에 대한 a priori test(ρ = 0.95), (b) MLP control 수행 중 a posteriori test(ρ = 0.90). 입력 8, 은닉층 2개, 노드 8개. Figure 4.6(b), 4.9.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card wide">
+                        <img src="../../assets/research/symmetry-preserving-control/mlp-control-results-re3900.jpg" alt="Vortical structures and force histories at Re = 3900 without control and with MLP control using FCNN-PS" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">Re = 3900 순간 와류 구조(λ<sub>2</sub> 기법; 좌: x–y 평면, 우: x–z 평면): (a) 비제어, (b) FCNN-PS를 이용한 MLP control(α = 0.01, T<sub>a</sub>u<sub>∞</sub>/d = 1.44). (c) 항력·양력 계수 시간 이력 — 제어는 tu<sub>∞</sub>/d ≈ 200에서 개시되며, 점선은 비제어 유동의 평균 항력과 ±C<sub>L,rms</sub>이다. Figure 4.10, 4.8.</figcaption>
+                    </figure>
+                </div>
+                <p class="detail-figure-credit">그림: 윤진혁, 아주대학교 박사학위 논문(2023), Part III 및 학위논문 심사 발표 자료.</p>
+            </div>
+        </section>
+
+        <section class="detail-section detail-section-alt" id="results">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Main Results</span>
+                    <h2 class="section-title">벽 압력 기반 예측을 통한 기존 비례 제어의 재현</h2>
+                    <p class="section-subtitle">후류 내 센서 없이 벽 압력 센서와 소규모 신경망만으로 기존 비례 제어와 동일한 성능 범위를 얻었다.</p>
+                </div>
+                <div class="detail-result-grid detail-result-grid-4">
+                    <div class="detail-result-card">
+                        <span class="detail-result-value">완전 제거</span>
+                        <span class="detail-result-label">Kármán vortex shedding and lift fluctuations at Re = 60</span>
+                    </div>
+                    <div class="detail-result-card">
+                        <span class="detail-result-value">−11.5%</span>
+                        <span class="detail-result-label">Mean drag C<sub>D</sub> at Re = 3900</span>
+                    </div>
+                    <div class="detail-result-card">
+                        <span class="detail-result-value">−67.2%</span>
+                        <span class="detail-result-label">Lift fluctuations C<sub>L,rms</sub> at Re = 3900</span>
+                    </div>
+                    <div class="detail-result-card">
+                        <span class="detail-result-value">0.95 → 0.90</span>
+                        <span class="detail-result-label">Correlation of v<sub>s</sub><sup>pred</sup>: a priori → a posteriori test</span>
+                    </div>
+                </div>
+                <article class="detail-card">
+                    <h3 class="detail-card-title">해석</h3>
+                    <p>Re = 3900에서 학습 데이터 생성에 사용한 비례 제어는 초기장에 따라 평균 항력을 11.0–11.9%, 양력 섭동을 61.0–67.8% 감소시켰다. MLP control의 결과(11.5%, 67.2%)는 이 범위 내에 있으므로, 기존 비례 제어보다 우수한 결과라기보다 벽 압력만으로 동일한 제어를 재현한 결과로 해석된다.</p>
+                    <p>제어 중 예측 상관계수는 0.90으로 사전 검증 값(0.95)보다 다소 낮다. 이는 난류의 소규모 교란에 대한 예측 성능은 낮으나, 비례 제어에 필요한 센싱 속도의 물리적 특성은 학습되었음을 의미한다. 또한 학습에 사용한 비례 제어를 4회로 줄이거나 스팬 방향 압력 센서를 64개에서 4개로 줄여도 제어 성능이 유지되었다.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="detail-section" id="outputs">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Related Outputs</span>
+                    <h2 class="section-title">논문 및 발표</h2>
+                </div>
+                <div class="detail-related-list">
+                    <article class="detail-related-item">
+                        <span class="detail-related-meta">Dissertation</span>
+                        <h3>아주대학교 박사학위 논문 2023</h3>
+                        <p>윤진혁, "Machine-Learning-Based Proportional Control and Unsteady Distributed Forcing of Turbulent Flow over a Circular Cylinder," 아주대학교 대학원 기계공학과, 2023. 본 연구는 Part III에 해당한다.</p>
+                    </article>
+                    <article class="detail-related-item">
+                        <span class="detail-related-meta">Journal</span>
+                        <h3>Applied Sciences 2023</h3>
+                        <p>J. Yun and J. Lee, "Prediction of Near-Wake Velocity in Laminar Flow over a Circular Cylinder Using Neural Networks with Instantaneous Wall Pressure Input," <em>Applied Sciences</em>, 13(12), 6891, 2023.</p>
+                    </article>
+                    <article class="detail-related-item">
+                        <span class="detail-related-meta">Conference</span>
+                        <h3>한국전산유체공학회 2023 · 한국유체공학학술대회 2022</h3>
+                        <p>대칭성을 보장하는 신경망 구조 및 이를 활용한 실린더 주위 유동의 되먹임 제어 연구 (2023.05, AI CFD 특별세션) · 대칭성 기반 인공신경망을 이용한 원형 실린더 주위 유동의 비례 되먹임 제어 (2022.06, 구두 발표).</p>
+                    </article>
+                    <article class="detail-related-item">
+                        <span class="detail-related-meta">Conference</span>
+                        <h3>한국유체공학학술대회 2020 · APS DFD 2019</h3>
+                        <p>인공신경망 기반 벽 압력 센서를 이용한 실린더 주위 난류 유동의 비례 되먹임 제어 (2020.08, 우수논문상) · Active feedback control of flow over a circular cylinder with wall pressure sensor using machine learning (Seattle, 2019.11).</p>
+                    </article>
+                    <article class="detail-related-item">
+                        <span class="detail-related-meta">Baseline</span>
+                        <h3>학습 대상 비례 되먹임 제어</h3>
+                        <p>Re = 3900에서 신경망이 재현한 제어는 평균 센싱 속도를 이용한 비례 되먹임 제어(Phys. Fluids 2022)이다. <a href="../proportional-feedback-control/index.html">비례 되먹임 제어</a></p>
+                    </article>
+                </div>
+                <div class="detail-pager">
+                    <a href="../unsteady-distributed-forcing/index.html" class="detail-pager-link">
+                        <small>Previous Research</small>
+                        <span>비정상 분포 가진</span>
+                    </a>
+                    <a href="../proportional-feedback-control/index.html" class="detail-pager-link">
+                        <small>Next Research</small>
+                        <span>비례 되먹임 제어</span>
+                    </a>
+                    <a href="../../index.html#highlights" class="detail-pager-link">
+                        <small>Back</small>
+                        <span>Research Highlights</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../../js/main.js?v=2026q3"></script>
+    <script type="module" src="../../js/lab/symmetry.js?v=2026q3"></script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>난류 채널 유동 반대 제어 | 윤진혁</title>
+    <meta name="description" content="인공신경망 기반 벽 압력 센서를 이용한 난류 채널 유동 내 반대 제어(opposition control)">
+    <meta name="color-scheme" content="light dark">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/style.css?v=2026q3">
+</head>
+<body class="research-detail-page">
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="../../index.html#hero" class="nav-logo">JH Yun</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../../index.html#highlights" class="nav-link">Home</a></li>
+                <li><a href="#overview" class="nav-link active">Overview</a></li>
+                <li><a href="#explore" class="nav-link">Model</a></li>
+                <li><a href="#figures" class="nav-link">Figures</a></li>
+                <li><a href="#results" class="nav-link">Results</a></li>
+                <li><a href="#outputs" class="nav-link">Related</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="detail-main">
+        <section class="detail-hero-section" id="overview">
+            <div class="container">
+                <div class="detail-breadcrumb">Research Highlight F</div>
+                <div class="detail-hero-grid">
+                    <div class="detail-hero-copy">
+                        <span class="detail-kicker">Wall-Sensing Opposition Control</span>
+                        <h1 class="detail-title">인공신경망 기반 벽 압력 센서를 이용한 난류 채널 유동 내 반대 제어</h1>
+                        <p class="detail-summary">반대 제어(opposition control; Choi, Moin &amp; Kim 1994)는 벽 근처의 수직 방향(wall-normal) 속도를 센싱하여 그 반대 부호로 벽면에서 분사/흡입하는 제어 기법이며, 유동 내부의 속도를 측정해야 하므로 실제 적용이 어렵다. 본 연구는 벽면에서 측정 가능한 벽 압력 분포를 입력으로 y⁺ = 10의 수직 방향 속도를 예측하는 인공신경망(artificial neural network, ANN)을 구축하고, 이를 벽 압력 센서로 사용하여 Re<sub>τ</sub> = 177 난류 채널 유동의 반대 제어를 수행하였다. 그 결과 항력을 약 16% 감소시켰다.</p>
+                        <div class="detail-keywords">
+                            <span class="detail-keyword">ANN</span>
+                            <span class="detail-keyword">Opposition Control</span>
+                            <span class="detail-keyword">Turbulent Channel Flow</span>
+                            <span class="detail-keyword">Wall Pressure</span>
+                            <span class="detail-keyword">DNS, Re<sub>τ</sub> = 177</span>
+                        </div>
+                        <div class="detail-stat-grid">
+                            <div class="detail-stat-card">
+                                <span class="detail-stat-value">−16.1%</span>
+                                <span class="detail-stat-label">Drag reduction, ANN-based opposition control with wall pressure</span>
+                            </div>
+                            <div class="detail-stat-card">
+                                <span class="detail-stat-value">−19.8%</span>
+                                <span class="detail-stat-label">Drag reduction, original opposition control</span>
+                            </div>
+                            <div class="detail-stat-card">
+                                <span class="detail-stat-value">R ≈ 0.85</span>
+                                <span class="detail-stat-label">Correlation of the ANN-predicted wall-normal velocity at y⁺ = 10</span>
+                            </div>
+                        </div>
+                        <div class="detail-actions">
+                            <a href="#explore" class="btn btn-primary"><i class="fas fa-project-diagram"></i> 개념 모델</a>
+                            <a href="../../index.html#highlights" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Highlights로 돌아가기</a>
+                        </div>
+                    </div>
+                    <figure class="detail-hero-figure">
+                        <img src="../../assets/research/channel-opposition-control/ann-wall-pressure-template-architecture.jpg" alt="Neural network architecture predicting the wall-normal velocity at y+ = 10 from a wall-pressure template" class="detail-hero-image" loading="eager" decoding="async">
+                        <figcaption class="detail-hero-caption">(a) y⁺ = 10의 수직 방향 속도와 벽 압력, (b) 벽 압력 템플릿 P<sub>w</sub>(N<sub>x</sub>, N<sub>z</sub>)를 입력으로 y⁺ = 10의 속도를 출력하는 ANN 구조. 석사학위 논문 Fig. 11.</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-section lab-section" id="explore" aria-labelledby="explore-title">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Conceptual Model</span>
+                    <h2 class="section-title" id="explore-title">벽 압력 기반 반대 제어</h2>
+                    <p class="section-subtitle">벽 근처 주유동 방향 와류, 센싱 평면(y⁺ = 10), 벽면 분사/흡입의 관계와 센싱 방식에 따른 제어 거동을 y–z 단면의 개념 모델로 나타낸다. 유동은 개념적 재현이며, 수치는 논문 결과를 따른다.</p>
+                </div>
+
+                <div class="lab" data-lab="opposition">
+                    <figure class="lab-fallback">
+                        <img src="../../assets/research/channel-opposition-control/vortical-structures-no-control-vs-ann-control.jpg" alt="Vortical structures of turbulent channel flow without control and with ANN-based opposition control" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">개념 모델은 JavaScript 환경에서 표시된다. 위 그림은 비제어(a)와 ANN 기반 반대 제어(b)의 순간 와류 구조이다(석사학위 논문 Fig. 20).</figcaption>
+                    </figure>
+
+                    <div class="lab-live" hidden>
+                        <div class="lab-toolbar">
+                            <div class="lab-steps" role="tablist" aria-label="설명 단계">
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-opp"><span class="lab-step-num">1</span>벽 근처 와류</button>
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-opp"><span class="lab-step-num">2</span>반대 제어</button>
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-opp"><span class="lab-step-num">3</span>벽 압력 기반 예측</button>
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-opp"><span class="lab-step-num">4</span>제어 결과</button>
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-opp"><span class="lab-step-num">5</span>조건 비교</button>
+                            </div>
+                            <div class="lab-transport">
+                                <button class="lab-btn" type="button" data-act="play" aria-label="애니메이션 일시정지">일시정지</button>
+                                <button class="lab-btn" type="button" data-act="reset">초기화</button>
+                            </div>
+                        </div>
+
+                        <div class="lab-stage" id="lab-stage-opp" role="tabpanel" aria-label="개념 모델 화면">
+                            <div class="lab-canvas-wrap">
+                                <canvas class="lab-canvas" role="img" aria-label="난류 채널 유동 y–z 단면의 벽 근처 와류와 반대 제어 개념 애니메이션"></canvas>
+                                <span class="lab-badge">개념 모델 · 논문 DNS 결과 아님</span>
+                                <div class="lab-legend lab-legend-udf" aria-hidden="true"><span>−ω<sub>x</sub><i class="lab-colorbar"></i>+ω<sub>x</sub></span><span><i class="lab-swatch lab-swatch-act"></i>벽면 가진</span></div>
+                                <span class="lab-debug" hidden></span>
+                            </div>
+                            <p class="lab-caption"></p>
+                            <p class="lab-sr" aria-live="polite"></p>
+                        </div>
+
+                        <div class="lab-body">
+                            <div class="lab-chart-card">
+                                <div class="lab-chart-head">
+                                    <h3 class="lab-card-title">시간 이력</h3>
+                                    <span class="lab-chart-key"><span class="lab-key-item"><i class="lab-key lab-key-avg"></i>제어에 사용한 센싱 값</span><span class="lab-key-item"><i class="lab-key lab-key-raw"></i>DNS 속도</span><span class="lab-key-item"><i class="lab-key lab-key-env"></i>비제어 유동 기준</span><span class="lab-key-item"><i class="lab-key lab-key-ramp"></i>제어 개시 구간</span></span>
+                                </div>
+                                <div class="lab-chart-wrap"><canvas class="lab-chart" role="img" aria-label="센싱 평면의 수직 방향 속도, 벽면 가진 속도, 평균 압력 변화의 시간 이력 (개념 모델)"></canvas></div>
+                            </div>
+
+                            <aside class="lab-panel" aria-label="센싱 방식">
+                                <button class="lab-btn lab-toggle lab-toggle-main" type="button" data-param="control" aria-pressed="false"><i class="fas fa-power-off" aria-hidden="true"></i> 제어</button>
+
+                                <fieldset class="lab-group">
+                                    <legend class="lab-group-title">센싱 방식</legend>
+                                    <div class="lab-seg lab-seg-wrap" role="radiogroup" aria-label="센싱 방식">
+                                        <label><input type="radio" name="lab-mode" value="none" checked><span>비제어</span></label>
+                                        <label><input type="radio" name="lab-mode" value="original"><span>y⁺ = 10 속도</span></label>
+                                        <label><input type="radio" name="lab-mode" value="pressure"><span>ANN · 벽 압력</span></label>
+                                        <label><input type="radio" name="lab-mode" value="shear"><span>ANN · 벽 전단응력</span></label>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset class="lab-group">
+                                    <legend class="lab-group-title">예측 상관</legend>
+                                    <div class="lab-scatter-wrap"><canvas class="lab-scatter-canvas" aria-hidden="true"></canvas></div>
+                                    <p class="lab-hint lab-scatter-text"></p>
+                                </fieldset>
+                            </aside>
+                        </div>
+
+                        <div class="lab-paper">
+                            <div class="lab-paper-head">
+                                <h3 class="lab-card-title">논문 결과</h3>
+                                <span class="lab-paper-cond">DNS, Re<sub>τ</sub> = 177 · 벽 압력 템플릿 15 × 15 · 은닉층 2개 × 노드 112개 · tanh + linear</span>
+                            </div>
+                            <div class="lab-paper-grid">
+                                <div class="lab-metric"><span class="lab-metric-value">−19.8%</span><span class="lab-metric-label">반대 제어 (y⁺ = 10 속도 사용)</span></div>
+                                <div class="lab-metric"><span class="lab-metric-value">−16.1%</span><span class="lab-metric-label">ANN 기반 반대 제어 (벽 압력)</span></div>
+                                <div class="lab-metric"><span class="lab-metric-value">−20.2%</span><span class="lab-metric-label">ANN 기반 반대 제어 (벽 전단응력)</span></div>
+                                <div class="lab-metric"><span class="lab-metric-value">0.85</span><span class="lab-metric-label">ANN 예측 상관계수 R (벽 압력 입력)</span></div>
+                            </div>
+                            <p class="lab-note">항력 감소율은 시간 평균한 평균 압력 변화(mean pressure gradient)로 산정하였다(Table 6). 와류와 속도장은 벽 영상 와류(image vortex)를 포함한 2차원 점와류 모델로 나타낸 개념적 재현이다. 출처: 윤진혁, 「인공신경망 기반 벽 압력 센서를 이용한 난류 채널 유동 내 반대 제어」, 아주대학교 석사학위 논문, 2018.</p>
+                        </div>
+
+                        <template data-mode="none">비제어 유동에서는 센싱 값을 사용하지 않는다.</template>
+                        <template data-mode="original">기존 반대 제어는 DNS로 계산한 y⁺ = 10의 수직 방향 속도를 직접 사용한다.</template>
+                        <template data-mode="pressure">논문의 예측 상관계수는 R ≈ 0.85이다. 단일 지점 벽 압력과 y⁺ = 10 속도의 상관계수는 R = 0.16에 불과하다.</template>
+                        <template data-mode="shear">논문의 예측 상관계수는 R ≈ 0.9이다. 벽 전단응력과 y⁺ = 10 속도의 상관계수는 R = −0.76이다.</template>
+
+                        <template data-caption="vortex">난류 채널 유동의 y–z 단면에서 벽 근처 주유동 방향 와류(near-wall streamwise vortices)는 벽 수직 방향 속도를 유도하며, 채널 유동 항력의 주 원인이다. 점선은 센싱 평면(y⁺ = 10), 회색 화살표는 이 평면의 수직 방향 속도, 하단 띠는 벽 압력 분포이다.</template>
+                        <template data-caption="opposition">반대 제어는 y⁺ = 10의 수직 방향 속도와 반대 부호로 벽면에서 분사/흡입(청록 화살표)하여 벽 근처 와류의 모멘텀을 상쇄하고 그 발달을 억제한다. Re<sub>τ</sub> = 177 DNS에서 항력은 19.8% 감소하였다. 이 방식은 벽 근처 속도를 측정해야 하므로 실제 적용이 어렵다.</template>
+                        <template data-caption="pressure">y⁺ = 10의 수직 방향 속도와 벽 전단응력의 상관계수는 R = −0.76인 반면, 벽 압력과의 상관계수는 R = 0.16으로 뚜렷한 상관관계가 없다. 본 연구는 15 × 15 벽 압력 템플릿을 입력으로 하는 완전 연결 다층 퍼셉트론(은닉층 2개, 노드 112개)을 학습하여 R ≈ 0.85의 예측 성능을 얻었다.</template>
+                        <template data-caption="result">학습된 ANN의 예측값으로 반대 제어를 수행하였으며, 분사/흡입은 순 질량 유량이 0이 되도록 후처리하였다. 벽 압력 기반 제어는 항력을 16.1% 감소시켰고, 동일한 제어 매개변수로 학습한 벽 전단응력 기반 제어는 20.2%를 감소시켰다.</template>
+                        <template data-caption="explore">센싱 방식에 따른 벽면 가진과 평균 압력 변화를 비교한다. 벽 압력 기반 제어는 기존 반대 제어의 성능에 미치지 못하였으며, 논문은 학습 성능을 높이면 벽 압력의 경우에도 더 높은 제어 성능이 가능할 것으로 전망하였다.</template>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-section detail-section-alt">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Background</span>
+                    <h2 class="section-title">벽 측정량 기반 반대 제어의 필요성</h2>
+                    <p class="section-subtitle">반대 제어는 높은 항력 감소 성능을 보이지만, 유동 내부의 속도를 측정해야 하므로 실제 적용이 제한된다.</p>
+                </div>
+                <div class="detail-section-grid">
+                    <article class="detail-card">
+                        <h3 class="detail-card-title">문제 배경</h3>
+                        <p>벽 근처 속도는 벽 경계 흐름의 줄무늬 구조(streaky structure)와 밀접하게 관련되어 유동 제어에 유용한 정보이다. 반대 제어는 이 속도를 이용해 최대 25%의 항력 감소를 보고하였으나(Choi, Moin &amp; Kim 1994), 벽 근처 속도를 직접 측정해야 한다.</p>
+                        <p>선행 연구(Lee et al. 1997; Lorang et al. 2008)는 벽 전단응력을 입력으로 벽 근처 속도를 예측하였으나, 벽면 내부에서 측정이 용이한 벽 압력은 ANN의 입력으로 사용되지 않았다. 벽 압력은 벽 근처 속도와의 상관관계가 약해 예측이 더 어려운 문제이다.</p>
+                    </article>
+                    <article class="detail-card">
+                        <h3 class="detail-card-title">학습 데이터와 신경망</h3>
+                        <p>Re<sub>τ</sub> = 177 난류 채널 유동의 직접수치모사(direct numerical simulation, DNS)로 순간 유동장 400개를 생성하고, 벽 압력 분포와 y⁺ = 10 수직 방향 속도의 관계를 학습하였다.</p>
+                        <ul class="detail-list">
+                            <li>입력: 15 × 15 벽 압력 템플릿(벽 압력 rms로 정규화)</li>
+                            <li>구조: 완전 연결 다층 퍼셉트론, 은닉층 2개 × 노드 112개, tanh + linear</li>
+                            <li>매개변수 연구: 템플릿 크기, 은닉층 수, 은닉 노드 수</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-section" id="figures">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Key Figures</span>
+                    <h2 class="section-title">상관관계, 예측 성능 및 제어 결과</h2>
+                </div>
+                <div class="detail-figure-grid">
+                    <figure class="detail-figure-card">
+                        <img src="../../assets/research/channel-opposition-control/opposition-control-concept-schematic.jpg" alt="Schematic of opposition control" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">반대 제어의 개략도. 벽 근처의 수직 방향 속도를 센싱하여 반대 부호로 벽면에서 분사/흡입한다. 석사학위 논문 Fig. 17.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card">
+                        <img src="../../assets/research/channel-opposition-control/wall-shear-vs-wall-pressure-correlation-pdf.jpg" alt="Probability density functions between the wall-normal velocity at y+ = 10 and wall shear stress or wall pressure" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">y⁺ = 10의 수직 방향 속도와 (a) 벽 전단응력(R = −0.76), (b) 벽 압력(R = 0.16) 사이의 확률 밀도 함수(Re<sub>τ</sub> = 177). Fig. 1.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card">
+                        <img src="../../assets/research/channel-opposition-control/ann-prediction-vs-dns-pressure-and-shear.jpg" alt="Correlation between DNS and ANN-predicted wall-normal velocity with wall pressure and wall shear stress inputs" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">DNS와 ANN 예측 수직 방향 속도의 상관: (a) 벽 압력 입력(R ≈ 0.85), (b) 벽 전단응력 입력(R ≈ 0.9). Fig. 21.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card">
+                        <img src="../../assets/research/channel-opposition-control/mean-pressure-gradient-history-controls.jpg" alt="Temporal evolution of the mean pressure gradient for no control, original opposition control and ANN-based opposition controls" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">평균 압력 변화의 시간 이력: 비제어(검정 점선), 기존 반대 제어(검정 실선), 벽 압력 입력 ANN(초록), 벽 전단응력 입력 ANN(파랑). Fig. 22.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card wide">
+                        <img src="../../assets/research/channel-opposition-control/vortical-structures-no-control-vs-ann-control.jpg" alt="Vortical structures of turbulent channel flow without control and with ANN-based opposition control" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">순간 와류 구조(λ<sub>2</sub> = −1.0 등위면): (a) 비제어, (b) 벽 압력 기반 ANN 반대 제어. 주유동 방향 와류가 효과적으로 감소한다. Fig. 20.</figcaption>
+                    </figure>
+                </div>
+                <p class="detail-figure-credit">그림: 윤진혁, 아주대학교 석사학위 논문(2018).</p>
+            </div>
+        </section>
+
+        <section class="detail-section detail-section-alt" id="results">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Main Results</span>
+                    <h2 class="section-title">벽 압력 센서만으로 달성한 항력 감소</h2>
+                    <p class="section-subtitle">벽 압력 기반 ANN 센서로 기존 반대 제어(19.8%)에 근접한 16.1%의 항력 감소를 얻었다.</p>
+                </div>
+                <div class="detail-result-grid detail-result-grid-4">
+                    <div class="detail-result-card">
+                        <span class="detail-result-value">−16.1%</span>
+                        <span class="detail-result-label">ANN-based opposition control with wall pressure</span>
+                    </div>
+                    <div class="detail-result-card">
+                        <span class="detail-result-value">−19.8%</span>
+                        <span class="detail-result-label">Original opposition control with velocity at y⁺ = 10</span>
+                    </div>
+                    <div class="detail-result-card">
+                        <span class="detail-result-value">−20.2%</span>
+                        <span class="detail-result-label">ANN-based opposition control with wall shear stress</span>
+                    </div>
+                    <div class="detail-result-card">
+                        <span class="detail-result-value">0.16 → 0.85</span>
+                        <span class="detail-result-label">Correlation with v at y⁺ = 10: single-point wall pressure → ANN prediction</span>
+                    </div>
+                </div>
+                <article class="detail-card">
+                    <h3 class="detail-card-title">해석</h3>
+                    <p>단일 지점의 벽 압력은 벽 근처 속도와 뚜렷한 상관관계를 갖지 않지만, 공간 분포(템플릿)를 입력으로 하는 ANN은 y⁺ = 10의 수직 방향 속도를 R ≈ 0.85로 예측하였다. 이 예측값을 이용한 반대 제어는 주유동 방향 와류를 효과적으로 감소시켰다.</p>
+                    <p>벽 전단응력 입력 ANN(R ≈ 0.9)의 제어 결과(20.2%)는 선행 연구(Lee et al. 1997; Lorang et al. 2008)와 일치하였다. 벽 압력 기반 제어는 기존 반대 제어에 미치지 못하였으며, 학습 성능을 높이면 더 높은 제어 성능이 가능할 것으로 전망된다.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="detail-section" id="outputs">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Related Outputs</span>
+                    <h2 class="section-title">논문 및 발표</h2>
+                </div>
+                <div class="detail-related-list">
+                    <article class="detail-related-item">
+                        <span class="detail-related-meta">Thesis</span>
+                        <h3>아주대학교 석사학위 논문 2018</h3>
+                        <p>윤진혁, 「인공신경망 기반 벽 압력 센서를 이용한 난류 채널 유동 내 반대 제어」(Opposition control of turbulent channel flow with wall pressure sensor using artificial neural network), 아주대학교 대학원 기계공학과, 2018.</p>
+                    </article>
+                    <article class="detail-related-item">
+                        <span class="detail-related-meta">Conference</span>
+                        <h3>APS DFD 2018 · 대한기계학회 2017–2018</h3>
+                        <p>Opposition control of turbulent channel flow with wall pressure using deep neural network (Atlanta, 2018.11) · 인공신경망 기반 벽 압력 센서를 이용한 난류 채널 유동 내 반대 제어 (2018.04, 구두 발표) · 인공신경망 기반 벽 압력을 이용한 난류 채널 유동 내 벽 근처 속도 예측 (2017.11, 구두 발표).</p>
+                    </article>
+                    <article class="detail-related-item">
+                        <span class="detail-related-meta">Follow-up Journal</span>
+                        <h3>대한기계학회논문집 B 2023</h3>
+                        <p>김금영, 윤진혁, 이정일, 「상류 센서를 이용한 Re<sub>τ</sub>=395의 난류 채널 유동 반대 제어」, <em>대한기계학회논문집 B</em>, 47(3), 181-186, 2023.</p>
+                    </article>
+                    <article class="detail-related-item">
+                        <span class="detail-related-meta">Follow-up Conference</span>
+                        <h3>대한기계학회 2023</h3>
+                        <p>Re<sub>τ</sub> = 395와 590에서 상류 센서를 사용한 채널 난류 유동의 반대 제어 (2023.05).</p>
+                    </article>
+                </div>
+                <div class="detail-pager">
+                    <a href="../proportional-feedback-control/index.html" class="detail-pager-link">
+                        <small>Previous Research</small>
+                        <span>비례 되먹임 제어</span>
+                    </a>
+                    <a href="../../index.html#highlights" class="detail-pager-link">
+                        <small>Next</small>
+                        <span>Research Highlights로 돌아가기</span>
+                    </a>
+                    <a href="../../index.html#contact" class="detail-pager-link">
+                        <small>Contact</small>
+                        <span>연구 및 협업 문의</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../../js/main.js?v=2026q3"></script>
+    <script type="module" src="../../js/lab/opposition.js?v=2026q3"></script>
+</body>
+</html>

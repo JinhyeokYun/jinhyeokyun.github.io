@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비정상 분포 가진 | 윤진혁</title>
+    <meta name="description" content="비정상 분포 가진(unsteady distributed forcing)을 이용한 뭉툭한 물체 주위 난류 유동 제어: 경사 보텍스 쉐딩에 의한 후류 안정화">
+    <meta name="color-scheme" content="light dark">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/style.css?v=2026q3">
+</head>
+<body class="research-detail-page">
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="../../index.html#hero" class="nav-logo">JH Yun</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../../index.html#highlights" class="nav-link">Home</a></li>
+                <li><a href="#overview" class="nav-link active">Overview</a></li>
+                <li><a href="#explore" class="nav-link">Model</a></li>
+                <li><a href="#figures" class="nav-link">Figures</a></li>
+                <li><a href="#results" class="nav-link">Results</a></li>
+                <li><a href="#outputs" class="nav-link">Related</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="detail-main">
+        <section class="detail-hero-section" id="overview">
+            <div class="container">
+                <div class="detail-breadcrumb">Research Highlight C</div>
+                <div class="detail-hero-grid">
+                    <div class="detail-hero-copy">
+                        <span class="detail-kicker">Bluff-Body Wake Control</span>
+                        <h1 class="detail-title">비정상 분포 가진을 이용한 뭉툭한 물체 주위 난류 유동 제어</h1>
+                        <p class="detail-summary">본 연구는 기존 분포 가진(distributed forcing; Kim &amp; Choi 2005)을 확장한 비정상 분포 가진(unsteady distributed forcing, UDF)을 제안하였다. 유동 박리 지점 근처의 상·하면 슬롯에서 스팬 방향 정현파 분포의 분사/흡입을 가하고, 이 분포를 스팬 방향으로 일정한 속도로 이동시킨다. Re = 3900 원형 실린더 주위 난류 유동에 적용한 결과, 후류에 강한 경사 보텍스 쉐딩(oblique vortex shedding)이 형성되어 유동 박리가 크게 지연되었으며, 최적 조건에서 평균 항력과 양력 섭동(lift fluctuations)이 각각 43.1%, 98.8% 감소하였다.</p>
+                        <div class="detail-keywords">
+                            <span class="detail-keyword">Unsteady Distributed Forcing</span>
+                            <span class="detail-keyword">Oblique Vortex Shedding</span>
+                            <span class="detail-keyword">Open-Loop Control</span>
+                            <span class="detail-keyword">LES, Re = 3900</span>
+                            <span class="detail-keyword">Sphere, Re = 10<sup>4</sup></span>
+                        </div>
+                        <div class="detail-stat-grid">
+                            <div class="detail-stat-card">
+                                <span class="detail-stat-value">−43.1%</span>
+                                <span class="detail-stat-label">Mean drag C<sub>D</sub> at Re = 3900</span>
+                            </div>
+                            <div class="detail-stat-card">
+                                <span class="detail-stat-value">−98.8%</span>
+                                <span class="detail-stat-label">Lift fluctuations C<sub>L,rms</sub> at Re = 3900</span>
+                            </div>
+                            <div class="detail-stat-card">
+                                <span class="detail-stat-value">1.36 → 3.10</span>
+                                <span class="detail-stat-label">Recirculation length L<sub>r</sub>/d</span>
+                            </div>
+                        </div>
+                        <div class="detail-actions">
+                            <a href="#explore" class="btn btn-primary"><i class="fas fa-project-diagram"></i> 개념 모델</a>
+                            <a href="../../index.html#highlights" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Highlights로 돌아가기</a>
+                        </div>
+                    </div>
+                    <figure class="detail-hero-figure">
+                        <img src="../../assets/research/unsteady-distributed-forcing/forcing-schematic.jpg" alt="Schematics of unsteady distributed forcing: blowing and suction slots in the x–y plane and three forcing types in the y–z plane" class="detail-hero-image" loading="eager" decoding="async">
+                        <figcaption class="detail-hero-caption">(a) x–y 평면의 분사/흡입 슬롯과 가진 속도 ψ(t, z). (b) UDF-SI: 상·하면 가진이 동일 방향으로 이동하며 동위상, (c) UDF-SO: 동일 방향·역위상, (d) UDF-O: 상·하면 가진이 반대 방향으로 이동. 박사학위 논문 Figure 2.1.</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-section lab-section" id="explore" aria-labelledby="explore-title">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Conceptual Model</span>
+                    <h2 class="section-title" id="explore-title">비정상 분포 가진에 의한 경사 보텍스 쉐딩</h2>
+                    <p class="section-subtitle">가진 형태, 제어 주파수 f<sub>m</sub><sup>*</sup>, 제어 세기 V<sub>0</sub>/u<sub>∞</sub>에 따른 x–z 평면의 와류 구조와 힘의 변화를 개념 모델로 나타낸다. 유동은 개념적 재현이며, 수치는 논문 결과를 따른다.</p>
+                </div>
+
+                <div class="lab" data-lab="udf">
+                    <figure class="lab-fallback">
+                        <img src="../../assets/research/unsteady-distributed-forcing/vortical-structures-udf-types.jpg" alt="Instantaneous vortical structures at Re = 3900 without control and with three types of unsteady distributed forcing" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">개념 모델은 JavaScript 환경에서 표시된다. 위 그림은 비제어 유동과 세 가지 비정상 분포 가진의 순간 와류 구조이다(박사학위 논문 Figure 3.4).</figcaption>
+                    </figure>
+
+                    <div class="lab-live" hidden>
+                        <div class="lab-toolbar">
+                            <div class="lab-steps" role="tablist" aria-label="설명 단계">
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-udf"><span class="lab-step-num">1</span>비제어 후류</button>
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-udf"><span class="lab-step-num">2</span>분포 가진</button>
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-udf"><span class="lab-step-num">3</span>비정상 분포 가진</button>
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-udf"><span class="lab-step-num">4</span>시공간 비동기화</button>
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-udf"><span class="lab-step-num">5</span>매개변수 탐색</button>
+                            </div>
+                            <div class="lab-transport">
+                                <button class="lab-btn" type="button" data-act="play" aria-label="애니메이션 일시정지">일시정지</button>
+                                <button class="lab-btn" type="button" data-act="reset">초기화</button>
+                            </div>
+                        </div>
+
+                        <div class="lab-stage" id="lab-stage-udf" role="tabpanel" aria-label="개념 모델 화면">
+                            <div class="lab-canvas-wrap lab-canvas-wide">
+                                <canvas class="lab-canvas" role="img" aria-label="원형 실린더 후류 x–z 평면의 와류 구조 개념 애니메이션"></canvas>
+                                <span class="lab-badge">개념 모델 · 논문 LES 결과 아님</span>
+                                <div class="lab-legend lab-legend-udf" aria-hidden="true">
+                                    <span><i class="lab-swatch lab-swatch-neg"></i>상면 와류</span>
+                                    <span><i class="lab-swatch lab-swatch-pos"></i>하면 와류</span>
+                                    <span>흡입<i class="lab-colorbar lab-colorbar-forcing"></i>분사</span>
+                                </div>
+                                <span class="lab-debug" hidden></span>
+                            </div>
+                            <p class="lab-caption"></p>
+                            <p class="lab-sr" aria-live="polite"></p>
+                        </div>
+
+                        <div class="lab-body">
+                            <div class="lab-chart-card">
+                                <div class="lab-chart-head">
+                                    <h3 class="lab-card-title">시간 이력</h3>
+                                    <span class="lab-chart-key"><span class="lab-key-item"><i class="lab-key lab-key-avg"></i>z<sub>A</sub></span><span class="lab-key-item"><i class="lab-key lab-key-raw"></i>z<sub>C</sub> = z<sub>A</sub> + λ<sub>z</sub>/2</span><span class="lab-key-item"><i class="lab-key lab-key-env"></i>비제어 유동 기준</span><span class="lab-key-item"><i class="lab-key lab-key-ramp"></i>제어 개시 구간</span></span>
+                                </div>
+                                <div class="lab-chart-wrap"><canvas class="lab-chart" role="img" aria-label="두 스팬 방향 위치의 가진 속도와 단면 항력, 전체 항력, 양력의 시간 이력 (개념 모델)"></canvas></div>
+                            </div>
+
+                            <aside class="lab-panel" aria-label="가진 조건">
+                                <button class="lab-btn lab-toggle lab-toggle-main" type="button" data-param="control" aria-pressed="false"><i class="fas fa-power-off" aria-hidden="true"></i> 제어</button>
+
+                                <fieldset class="lab-group">
+                                    <legend class="lab-group-title">가진 형태</legend>
+                                    <div class="lab-seg" role="radiogroup" aria-label="가진 형태">
+                                        <label><input type="radio" name="lab-cfg" value="SI" checked><span>UDF-SI</span></label>
+                                        <label><input type="radio" name="lab-cfg" value="SO"><span>UDF-SO</span></label>
+                                        <label><input type="radio" name="lab-cfg" value="O"><span>UDF-O</span></label>
+                                    </div>
+                                    <p class="lab-hint lab-cfg-text"></p>
+                                </fieldset>
+
+                                <fieldset class="lab-group">
+                                    <legend class="lab-group-title">가진 조건</legend>
+                                    <div class="lab-field">
+                                        <label for="lab-fm">제어 주파수 f<sub>m</sub><sup>*</sup></label>
+                                        <output for="lab-fm"></output>
+                                        <div class="lab-range"><input id="lab-fm" type="range" min="0" max="3" step="0.05"><span class="lab-range-mark" data-mark="fm" aria-hidden="true"></span></div>
+                                    </div>
+                                    <div class="lab-field">
+                                        <label for="lab-v0">제어 세기 V<sub>0</sub>/u<sub>∞</sub></label>
+                                        <output for="lab-v0"></output>
+                                        <div class="lab-range"><input id="lab-v0" type="range" min="0" max="0.6" step="0.05"><span class="lab-range-mark" data-mark="v0" aria-hidden="true"></span></div>
+                                    </div>
+                                    <p class="lab-hint">스팬 방향 파장 λ<sub>z</sub>/d = π (m = 1), 가진 슬롯 중심 θ = ±90°, 폭 10°</p>
+                                </fieldset>
+
+                                <div class="lab-group">
+                                    <p class="lab-group-title">대표 조건</p>
+                                    <div class="lab-presets">
+                                        <button class="lab-chip" type="button" data-preset="optimum">최적 조건</button>
+                                        <button class="lab-chip" type="button" data-preset="low">저주파 가진 (fₘ* = 0.25)</button>
+                                        <button class="lab-chip" type="button" data-preset="high">고주파 가진 (fₘ* = 3)</button>
+                                        <button class="lab-chip" type="button" data-preset="sdf">분포 가진 (fₘ* = 0)</button>
+                                    </div>
+                                    <p class="lab-hint"><i class="lab-key lab-key-mark"></i>주황 눈금: 논문 최적 조건</p>
+                                </div>
+                            </aside>
+                        </div>
+
+                        <div class="lab-paper">
+                            <div class="lab-paper-head">
+                                <h3 class="lab-card-title">논문 결과</h3>
+                                <span class="lab-paper-cond">LES, Re = 3900 · UDF-SI · m = 1 (λ<sub>z</sub>/d = π) · V<sub>0</sub>/u<sub>∞</sub> = 0.4 · f<sub>m</sub><sup>*</sup> = 0.75</span>
+                            </div>
+                            <div class="lab-paper-grid">
+                                <div class="lab-metric"><span class="lab-metric-value">−43.1%</span><span class="lab-metric-label">평균 항력 C<sub>D</sub> (1.018 → 0.579)</span></div>
+                                <div class="lab-metric"><span class="lab-metric-value">−98.8%</span><span class="lab-metric-label">양력 섭동 C<sub>L,rms</sub> (0.195 → 0.0024)</span></div>
+                                <div class="lab-metric"><span class="lab-metric-value">1.36 → 3.10</span><span class="lab-metric-label">재순환 길이 L<sub>r</sub>/d</span></div>
+                                <div class="lab-metric"><span class="lab-metric-value">3.6–12.0</span><span class="lab-metric-label">제어 효율 η<sub>a</sub> (0.2 ≤ V<sub>0</sub>/u<sub>∞</sub> ≤ 0.6)</span></div>
+                            </div>
+                            <p class="lab-note">경사 보텍스 쉐딩은 스팬 방향으로 이동하는 가진의 위상선이 하류로 대류되는 형태로 나타내었으며, 와류 구조와 힘의 변화는 학위논문 Figure 3.1–3.2의 경향을 따르는 개념적 재현이다. 수치는 모두 논문 값이다. 2025년 대한기계학회 발표에서는 제어 주파수를 f<sub>0</sub><sup>*</sup>로 표기하였다. 출처: 윤진혁, <em>Machine-Learning-Based Proportional Control and Unsteady Distributed Forcing of Turbulent Flow over a Circular Cylinder</em>, 아주대학교 박사학위 논문, 2023, Part I; 윤진혁·이정일, 「비정상 분포 가진을 통한 원형 실린더 난류 후류의 안정화」, 대한기계학회 유체공학부문 학술대회, 2025.</p>
+                        </div>
+
+                        <template data-cfg="SI">UDF-SI: 상·하면 가진이 동일 방향으로 이동하며 동위상(in-phase)이다.</template>
+                        <template data-cfg="SO">UDF-SO: 상·하면 가진이 동일 방향으로 이동하며 역위상(out-of-phase)이다.</template>
+                        <template data-cfg="O">UDF-O: 상·하면 가진이 서로 반대 방향으로 이동한다.</template>
+
+                        <template data-caption="none">Re = 3900 원형 실린더 후류를 위에서 본 x–z 평면이다. 비제어 유동에서 Kármán 보텍스 쉐딩(Kármán vortex shedding)은 스팬 방향으로 거의 균일한 구조를 가지며, 청색과 주황색은 각각 상면과 하면에서 생성된 와류이다. 음영은 재순환 영역이다.</template>
+                        <template data-caption="sdf">기존 분포 가진(distributed forcing; Kim &amp; Choi 2005)은 스팬 방향 정현파 분포의 정상 분사/흡입으로 후류의 2차원 구조를 교란한다. 비정상 분포 가진에서 제어 주파수가 0인 경우(f<sub>m</sub><sup>*</sup> = 0)가 이에 해당한다.</template>
+                        <template data-caption="udf">비정상 분포 가진은 가진 속도 ψ(t, z) = V<sub>0</sub> sin 2π(mz/L<sub>z</sub> − f<sub>m</sub>t)와 같이 스팬 방향 정현파 분포를 일정한 속도로 이동시킨다. 최적 조건(UDF-SI, V<sub>0</sub>/u<sub>∞</sub> = 0.4, f<sub>m</sub><sup>*</sup> = 0.75)에서 상·하면으로부터 경사 보텍스 쉐딩(oblique vortex shedding)이 형성되어 후류가 안정화되며, 재순환 길이 L<sub>r</sub>/d는 1.36에서 3.10으로 증가하였다.</template>
+                        <template data-caption="desync">고정된 스팬 방향 위치에서 가진은 시간 주기적인 분사/흡입이며, 반 파장(λ<sub>z</sub>/2) 떨어진 두 위치 z<sub>A</sub>, z<sub>C</sub>의 가진은 역위상이다. 스팬 방향으로 시차를 갖는 분사/흡입에 의해 국소적인 유동 박리 지연과 재부착이 연속적으로 발생하며, 이러한 시간·공간적 비동기화에 의해 최적 조건에서 항력 섭동과 양력 섭동이 각각 최대 91%, 99% 억제되었다(2025 대한기계학회).</template>
+                        <template data-caption="explore">가진 형태, 제어 주파수, 제어 세기에 따른 후류 구조를 비교한다. 논문에서 낮은 제어 주파수(0 &lt; f<sub>m</sub><sup>*</sup> ≤ 0.5)는 항력과 양력 섭동을 오히려 증가시켰고, f<sub>m</sub><sup>*</sup> &gt; 0.5에서 이를 크게 감소시켰다. 제어 세기는 V<sub>0</sub>/u<sub>∞</sub> = 0.2부터 효과가 커지며 0.4 이상에서 포화되었다.</template>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-section detail-section-alt">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Background</span>
+                    <h2 class="section-title">3차원 가진에 의한 난류 후류 안정화</h2>
+                    <p class="section-subtitle">시간 주기적 가진이나 합성 제트(synthetic jet)는 평균 항력과 양력 섭동을 줄일 수 있으나, 제어 과정의 시간적 변동으로 항력 섭동이 오히려 증가할 수 있다.</p>
+                </div>
+                <div class="detail-section-grid">
+                    <article class="detail-card">
+                        <h3 class="detail-card-title">문제 배경</h3>
+                        <p>뭉툭한 물체(bluff body)의 난류 후류를 안정화하면 항력뿐 아니라 소음과 진동도 줄일 수 있다. 원형 실린더 주위 유동에서는 유동 박리와 Kármán 보텍스 쉐딩이 실린더에 작용하는 항력과 양력 섭동의 주요 원인이다.</p>
+                        <p>기존 분포 가진은 스팬 방향으로 변화하는 정상 분사/흡입으로 후류의 2차원 구조를 깨뜨려 항력을 감소시켰다. 본 연구는 이 가진 분포를 스팬 방향으로 이동시켜, 평균 항력뿐 아니라 항력과 양력의 섭동까지 함께 감소시키는 것을 목표로 하였다.</p>
+                    </article>
+                    <article class="detail-card">
+                        <h3 class="detail-card-title">비정상 분포 가진</h3>
+                        <p>가진 속도는 ψ(t, z) = V<sub>0</sub> sin 2π(mz/L<sub>z</sub> − f<sub>m</sub>t)로 정의된다. m은 스팬 방향 파수, f<sub>m</sub>은 가진 분포가 스팬 방향으로 이동하는 모드 제어 주파수이며, f<sub>m</sub> = 0이면 기존 분포 가진과 같다. 가진은 매 순간 순 질량 유량이 0(zero net mass flux)이다.</p>
+                        <ul class="detail-list">
+                            <li>가진 형태: UDF-SI(동일 방향·동위상), UDF-SO(동일 방향·역위상), UDF-O(반대 방향)</li>
+                            <li>매개변수: 이동 방향, 위상, 제어 주파수, 제어 세기, 스팬 방향 파장</li>
+                            <li>가진 위치: 유동 박리 지점 근처(θ = ±90°, 폭 10°), 주유동 방향 포물선 분포</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-section" id="figures">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Key Figures</span>
+                    <h2 class="section-title">제어 주파수에 따른 제어 성능과 경사 보텍스 쉐딩</h2>
+                </div>
+                <div class="detail-video-pair">
+                    <figure class="detail-video-card">
+                        <video class="detail-video" src="../../assets/research/unsteady-distributed-forcing/nocontrol-lambda2.mp4" width="992" height="880" poster="../../assets/research/unsteady-distributed-forcing/nocontrol-lambda2-poster.jpg" muted loop playsinline preload="none" data-autoplay aria-label="LES animation of vortical structures without control at Re = 3900"></video>
+                        <figcaption class="detail-figure-caption">비제어 유동 (λ<sub>2</sub> 기법, x–z 평면)</figcaption>
+                    </figure>
+                    <figure class="detail-video-card">
+                        <video class="detail-video" src="../../assets/research/unsteady-distributed-forcing/udf-lambda2.mp4" width="992" height="880" poster="../../assets/research/unsteady-distributed-forcing/udf-lambda2-poster.jpg" muted loop playsinline preload="none" data-autoplay aria-label="LES animation of vortical structures under unsteady distributed forcing at Re = 3900"></video>
+                        <figcaption class="detail-figure-caption">비정상 분포 가진 — 경사 보텍스 쉐딩</figcaption>
+                    </figure>
+                    <figure class="detail-video-card">
+                        <video class="detail-video" src="../../assets/research/unsteady-distributed-forcing/nocontrol-vorticity.mp4" width="992" height="416" poster="../../assets/research/unsteady-distributed-forcing/nocontrol-vorticity-poster.jpg" muted loop playsinline preload="none" data-autoplay aria-label="LES animation of spanwise vorticity without control at Re = 3900"></video>
+                        <figcaption class="detail-figure-caption">비제어 유동 (스팬 방향 와도, x–y 평면)</figcaption>
+                    </figure>
+                    <figure class="detail-video-card">
+                        <video class="detail-video" src="../../assets/research/unsteady-distributed-forcing/udf-vorticity.mp4" width="992" height="416" poster="../../assets/research/unsteady-distributed-forcing/udf-vorticity-poster.jpg" muted loop playsinline preload="none" data-autoplay aria-label="LES animation of spanwise vorticity under unsteady distributed forcing at Re = 3900"></video>
+                        <figcaption class="detail-figure-caption">비정상 분포 가진 (스팬 방향 와도, x–y 평면)</figcaption>
+                    </figure>
+                </div>
+                <p class="detail-video-note">Re = 3900 LES 결과 영상(박사학위 논문 심사 발표 자료). 동작 줄이기 설정에서는 자동 재생되지 않는다.</p>
+                <div class="detail-figure-grid">
+                    <figure class="detail-figure-card">
+                        <img src="../../assets/research/unsteady-distributed-forcing/drag-lift-vs-forcing-frequency.jpg" alt="Mean drag and rms lift coefficients versus mode forcing frequency for three types of unsteady distributed forcing" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">제어 주파수 f<sub>m</sub><sup>*</sup>에 따른 평균 항력 계수(상)와 양력 계수 rms(하)(m = 1, V<sub>0</sub>/u<sub>∞</sub> = 0.4). 낮은 제어 주파수에서는 비제어 유동(점선)보다 증가하며, 양력 섭동은 UDF-SI·UDF-SO에서 f<sub>m</sub><sup>*</sup> = 0.75, UDF-O에서 f<sub>m</sub><sup>*</sup> = 1일 때 최대로 감소한다. Figure 3.1.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card">
+                        <img src="../../assets/research/unsteady-distributed-forcing/control-efficiency.png" alt="Control efficiency versus forcing amplitude for UDF-SI" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">UDF-SI(m = 1, f<sub>m</sub><sup>*</sup> = 0.75)의 제어 세기 V<sub>0</sub>/u<sub>∞</sub>에 따른 제어 효율 η<sub>a</sub>(절감 동력 ÷ 제어 입력 동력). 고려한 범위에서 3.6 ≤ η<sub>a</sub> ≤ 12.0이다. Figure 3.13.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card wide">
+                        <img src="../../assets/research/unsteady-distributed-forcing/vortical-structures-udf-types.jpg" alt="Instantaneous vortical structures at Re = 3900 without control and with UDF-SI, UDF-SO and UDF-O" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">Re = 3900 순간 와류 구조(λ<sub>2</sub> 기법; 좌: x–y 평면, 우: x–z 평면): (a) 비제어, (b) UDF-SI, (c) UDF-SO(f<sub>m</sub><sup>*</sup> = 0.75), (d) UDF-O(f<sub>m</sub><sup>*</sup> = 1), V<sub>0</sub>/u<sub>∞</sub> = 0.4. 세 가진 형태 모두 상·하면에서 경사 보텍스 쉐딩이 형성된다. Figure 3.4.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card wide">
+                        <img src="../../assets/research/unsteady-distributed-forcing/vortical-structures-vs-forcing-frequency.jpg" alt="Instantaneous vortical structures for UDF-SI with different mode forcing frequencies" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">UDF-SI(m = 1, V<sub>0</sub>/u<sub>∞</sub> = 0.4)의 제어 주파수에 따른 순간 와류 구조: (a) f<sub>m</sub><sup>*</sup> = 0.25 — Kármán 보텍스 쉐딩이 비제어 유동보다 강화됨, (b) 0.75, (c) 1.5, (d) 3. 제어 주파수가 증가할수록 경사 보텍스 쉐딩의 두께가 감소한다. Figure 3.8.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card wide">
+                        <img src="../../assets/research/unsteady-distributed-forcing/oblique-vortex-mechanism.jpg" alt="Formation of a single oblique vortex over one forcing period" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">한 가진 주기 동안 단일 경사 보텍스 쉐딩의 형성 과정(UDF-SI, V<sub>0</sub>/u<sub>∞</sub> = 0.4, f<sub>m</sub><sup>*</sup> = 0.75). 좌: 표면 한 지점의 가진 속도, 우: 시점 I–IV의 x–y 평면 속도 벡터장. 경사 와류의 발달과 함께 유동 박리와 재부착이 반복되며, 박리점이 후방으로 지연된다. Figure 3.12.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card">
+                        <img src="../../assets/research/unsteady-distributed-forcing/sphere-double-helix.jpg" alt="Forcing velocity on a sphere for the double-helix mode and vortical structures behind the sphere at Re = 10^4" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">구 주위 난류 유동(Re = 10<sup>4</sup>)에의 적용: (a) double-helix mode(m = 2)의 가진 속도 분포, (b) 구 후류의 순간 와류 구조. 항력과 양력 섭동이 각각 약 43%, 76% 감소하였다. 박사학위 논문 Appendix A.</figcaption>
+                    </figure>
+                </div>
+                <p class="detail-figure-credit">그림: 윤진혁, 아주대학교 박사학위 논문(2023), Part I 및 Appendix A, 학위논문 심사 발표 자료.</p>
+            </div>
+        </section>
+
+        <section class="detail-section detail-section-alt" id="results">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Main Results</span>
+                    <h2 class="section-title">평균 항력과 힘의 섭동의 동시 감소</h2>
+                    <p class="section-subtitle">스팬 방향으로 이동하는 가진이 형성한 경사 보텍스 쉐딩은 실린더 주위 유동장을 안정화하고 유동 박리를 크게 지연시켰다.</p>
+                </div>
+                <div class="detail-result-grid detail-result-grid-4">
+                    <div class="detail-result-card">
+                        <span class="detail-result-value">−43.1%</span>
+                        <span class="detail-result-label">Mean drag C<sub>D</sub> at Re = 3900 (UDF-SI, f<sub>m</sub><sup>*</sup> = 0.75)</span>
+                    </div>
+                    <div class="detail-result-card">
+                        <span class="detail-result-value">−98.8%</span>
+                        <span class="detail-result-label">Lift fluctuations C<sub>L,rms</sub> at Re = 3900</span>
+                    </div>
+                    <div class="detail-result-card">
+                        <span class="detail-result-value">3.6–12.0</span>
+                        <span class="detail-result-label">Control efficiency η<sub>a</sub> for 0.2 ≤ V<sub>0</sub>/u<sub>∞</sub> ≤ 0.6</span>
+                    </div>
+                    <div class="detail-result-card">
+                        <span class="detail-result-value">−43% · −76%</span>
+                        <span class="detail-result-label">Drag and lift fluctuations over a sphere at Re = 10<sup>4</sup></span>
+                    </div>
+                </div>
+                <article class="detail-card">
+                    <h3 class="detail-card-title">해석</h3>
+                    <p>비정상 분포 가진은 후류에 강한 경사 보텍스 쉐딩을 발생시키며, 상·하면에서 각각 형성된 경사 보텍스 쉐딩이 주위 유동장을 안정화하고 실린더 표면의 유동 박리를 크게 지연시킨다. 그 결과 재순환 길이가 L<sub>r</sub>/d = 1.36에서 3.10으로 증가하고, 평균 항력과 양력 섭동이 동시에 감소하였다.</p>
+                    <p>제어 성능은 제어 주파수에 크게 의존한다. 낮은 제어 주파수에서는 Kármán 보텍스 쉐딩이 오히려 강화되어 항력과 양력 섭동이 증가하였으며, 제어 세기는 V<sub>0</sub>/u<sub>∞</sub> ≥ 0.4에서 포화되었다. 실린더의 단일 표면에만 가진을 적용한 경우에는 평균 항력과 양력 섭동이 크게 감소하면서 약 0.7의 평균 양력 계수가 발생하였다.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="detail-section" id="outputs">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Related Outputs</span>
+                    <h2 class="section-title">논문 및 발표</h2>
+                </div>
+                <div class="detail-related-list">
+                    <article class="detail-related-item">
+                        <span class="detail-related-meta">Dissertation</span>
+                        <h3>아주대학교 박사학위 논문 2023</h3>
+                        <p>윤진혁, "Machine-Learning-Based Proportional Control and Unsteady Distributed Forcing of Turbulent Flow over a Circular Cylinder," 아주대학교 대학원 기계공학과, 2023. 본 연구는 Part I과 Appendix A(구 주위 난류 유동)에 해당한다.</p>
+                    </article>
+                    <article class="detail-related-item">
+                        <span class="detail-related-meta">Conference</span>
+                        <h3>대한기계학회 유체공학부문 2025</h3>
+                        <p>비정상 분포 가진을 통한 원형 실린더 난류 후류의 안정화 (2025.04, 구두 발표) · 비정상 분포 가진 기법을 이용한 NACA0012 익형 주위 난류 유동의 제어 (2025.04).</p>
+                    </article>
+                    <article class="detail-related-item">
+                        <span class="detail-related-meta">Keynote</span>
+                        <h3>ASME-JSME-KSME Fluids Engineering Division 2023</h3>
+                        <p>A periodically rotating distributed forcing of turbulent flow over a sphere for reductions of mean drag and lift fluctuations with a double-helix mode (Osaka, 2023.07).</p>
+                    </article>
+                </div>
+                <div class="detail-pager">
+                    <a href="../kiln-surrogate/index.html" class="detail-pager-link">
+                        <small>Previous Research</small>
+                        <span>소성로 대리 모델</span>
+                    </a>
+                    <a href="../symmetry-preserving-control/index.html" class="detail-pager-link">
+                        <small>Next Research</small>
+                        <span>대칭성 보장 신경망 제어</span>
+                    </a>
+                    <a href="../../index.html#highlights" class="detail-pager-link">
+                        <small>Back</small>
+                        <span>Research Highlights</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../../js/main.js?v=2026q3"></script>
+    <script type="module" src="../../js/lab/udf.js?v=2026q3"></script>
+</body>
+</html>

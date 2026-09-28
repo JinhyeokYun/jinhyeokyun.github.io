@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>소성로 3차원 대리 모델 | 윤진혁</title>
+    <meta name="description" content="물리 조건부 latent diffusion 대리 모델을 이용한 산업용 회전식 시멘트 소성로 연소의 다중 물리장 예측과 신속한 공정 선별">
+    <meta name="color-scheme" content="light dark">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/style.css?v=2026q3">
+</head>
+<body class="research-detail-page">
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="../../index.html#hero" class="nav-logo">JH Yun</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../../index.html#highlights" class="nav-link">Home</a></li>
+                <li><a href="#overview" class="nav-link active">Overview</a></li>
+                <li><a href="#explore" class="nav-link">Model</a></li>
+                <li><a href="#figures" class="nav-link">Figures</a></li>
+                <li><a href="#results" class="nav-link">Results</a></li>
+                <li><a href="#outputs" class="nav-link">Related</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="detail-main">
+        <section class="detail-hero-section" id="overview">
+            <div class="container">
+                <div class="detail-breadcrumb">Research Highlight B</div>
+                <div class="detail-hero-grid">
+                    <div class="detail-hero-copy">
+                        <span class="detail-kicker">Industrial Multi-Physics Surrogate</span>
+                        <h1 class="detail-title">물리 조건부 latent diffusion 대리 모델을 이용한 산업용 소성로 연소 다중 물리장 예측</h1>
+                        <p class="detail-summary">대체 연료로 전환하는 회전식 시멘트 소성로(rotary cement kiln)의 매개변수 최적화는 고충실도 반응 유동 해석의 계산 비용에 의해 제한된다. 본 연구는 7차원 물리 조건 벡터를 5개 반응 유동장(온도, CO, CO₂, H₂O, NO)에 사상하는 조건부 latent diffusion 대리 모델(surrogate model)을 제안하였다. 소성로 축 방향 수송의 물리적 연속성을 이용하여 3차원 CFD 사례를 단면 학습 자료로 분해하였으며, 검증 사례에서 단면 평균 온도 오차 9.9 K를 얻었다. 3차원 사례 하나를 GPU 1대에서 약 9.5분에 재구성하여 직접 CFD 대비 O(10³)의 가속을 달성하였다.</p>
+                        <div class="detail-keywords">
+                            <span class="detail-keyword">Latent Diffusion</span>
+                            <span class="detail-keyword">Conditioning Vector</span>
+                            <span class="detail-keyword">Reacting-Flow CFD</span>
+                            <span class="detail-keyword">5 Fields · 512 × 512</span>
+                            <span class="detail-keyword">Process Screening</span>
+                        </div>
+                        <div class="detail-stat-grid">
+                            <div class="detail-stat-card">
+                                <span class="detail-stat-value">9.9 K</span>
+                                <span class="detail-stat-label">Mean slice-level temperature error on held-out cases</span>
+                            </div>
+                            <div class="detail-stat-card">
+                                <span class="detail-stat-value">2.2×</span>
+                                <span class="detail-stat-label">Lower five-field normalized error than the best non-diffusion surrogate</span>
+                            </div>
+                            <div class="detail-stat-card">
+                                <span class="detail-stat-value">≈ 9.5 min</span>
+                                <span class="detail-stat-label">Full 3D case on one consumer GPU, O(10³) speedup vs CFD</span>
+                            </div>
+                        </div>
+                        <div class="detail-actions">
+                            <a href="#explore" class="btn btn-primary"><i class="fas fa-project-diagram"></i> 개념 모델</a>
+                            <a href="../../index.html#highlights" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Highlights로 돌아가기</a>
+                        </div>
+                    </div>
+                    <figure class="detail-hero-figure">
+                        <img src="../../assets/research/kiln-surrogate/kiln-framework-offline-training-fast-inference.jpg" alt="End-to-end surrogate modeling framework with offline training and fast inference" class="detail-hero-image" loading="eager" decoding="async">
+                        <figcaption class="detail-hero-caption">대리 모델 전체 구성. 상: 오프라인 학습(CFD 자료 전처리, VAE 잠재 부호화, 조건부 확산 학습), 하: 신속 추론(조건부 생성, VAE 복원, 단면 단위 3차원 재구성, 진단 평가). 원고 Fig. 1.</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-section lab-section" id="explore" aria-labelledby="explore-title">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Conceptual Model</span>
+                    <h2 class="section-title" id="explore-title">조건부 latent diffusion 기반 단면 생성과 3차원 재구성</h2>
+                    <p class="section-subtitle">조건 벡터, 축 방향 단면 분해, DDIM sampling, VAE 복원, 단면 적층에 의한 3차원 재구성의 흐름을 개념 모델로 나타낸다. 잠재 변수와 잡음 제거 과정은 개념적 표현이며, 최종 단면과 수치는 원고 결과를 따른다.</p>
+                </div>
+
+                <div class="lab" data-lab="kiln" data-assets="../../assets/research/kiln-surrogate/lab">
+                    <figure class="lab-fallback">
+                        <img src="../../assets/research/kiln-surrogate/kiln-validation-near-burner-five-field-full-retraining.jpg" alt="Near-burner cross-sectional comparison for a validation sample using full retraining" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">개념 모델은 JavaScript 환경에서 표시된다. 위 그림은 버너 인근 검증 단면의 CFD 기준 해(a), 대리 모델 예측(b), 절대 오차(c), 파워 스펙트럼 비교이다(원고 Fig. 16).</figcaption>
+                    </figure>
+
+                    <div class="lab-live" hidden>
+                        <div class="lab-toolbar">
+                            <div class="lab-steps" role="tablist" aria-label="설명 단계">
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-kiln"><span class="lab-step-num">1</span>문제 정의</button>
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-kiln"><span class="lab-step-num">2</span>조건 벡터·단면 분해</button>
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-kiln"><span class="lab-step-num">3</span>Latent diffusion</button>
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-kiln"><span class="lab-step-num">4</span>3차원 재구성</button>
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-kiln"><span class="lab-step-num">5</span>모델 비교</button>
+                            </div>
+                            <div class="lab-transport">
+                                <button class="lab-btn" type="button" data-act="play" aria-label="애니메이션 일시정지">일시정지</button>
+                                <button class="lab-btn" type="button" data-act="reset">초기화</button>
+                            </div>
+                        </div>
+
+                        <div class="lab-stage" id="lab-stage-kiln" role="tabpanel" aria-label="개념 모델 화면">
+                            <div class="lab-canvas-wrap lab-canvas-kiln">
+                                <canvas class="lab-canvas" role="img" aria-label="소성로 축 방향 단면, 잠재 공간의 DDIM sampling, 5개 물리장 복원의 개념 애니메이션"></canvas>
+                                <span class="lab-badge">개념 모델 · 잠재 변수는 도식</span>
+                                <span class="lab-debug" hidden></span>
+                            </div>
+                            <p class="lab-caption"></p>
+                            <p class="lab-sr" aria-live="polite"></p>
+                        </div>
+
+                        <div class="lab-body">
+                            <div class="lab-chart-card">
+                                <div class="lab-chart-head">
+                                    <h3 class="lab-card-title">대리 모델 비교 (원고 Table 5)</h3>
+                                    <div class="lab-seg lab-seg-wrap" role="radiogroup" aria-label="비교 지표">
+                                        <label><input type="radio" name="lab-metric" value="mae" checked><span>정규화 MAE</span></label>
+                                        <label><input type="radio" name="lab-metric" value="psnr"><span>PSNR</span></label>
+                                        <label><input type="radio" name="lab-metric" value="tmae"><span>온도 MAE</span></label>
+                                        <label><input type="radio" name="lab-metric" value="peak"><span>Peak count</span></label>
+                                    </div>
+                                </div>
+                                <div class="lab-bar-wrap"><canvas class="lab-bar-canvas" role="img" aria-label="6개 대리 모델의 검증 지표 막대그래프 (원고 Table 5)"></canvas></div>
+                                <p class="lab-hint">모든 모델은 동일한 VAE decoder, 7차원 조건 벡터, 평가 절차를 공유한다. 정규화 MAE·PSNR은 5개 장과 검증 사례 전체의 평균이다.</p>
+                            </div>
+
+                            <aside class="lab-panel" aria-label="sampling 조건과 조건 벡터">
+                                <fieldset class="lab-group">
+                                    <legend class="lab-group-title">DDIM sampling</legend>
+                                    <div class="lab-field">
+                                        <label for="lab-ddim">sampling 단계</label>
+                                        <output for="lab-ddim">0</output>
+                                        <div class="lab-range"><input id="lab-ddim" type="range" min="0" max="25" step="1" value="0"></div>
+                                    </div>
+                                    <button class="lab-btn" type="button" data-act="seed">초기 잡음 재생성</button>
+                                </fieldset>
+                                <fieldset class="lab-group">
+                                    <legend class="lab-group-title">조건 벡터 · 표시 단면의 검증 사례</legend>
+                                    <ul class="lab-cond">
+                                        <li style="--n:-0.25"><span>X<sub>1</sub> 대체 연료 대체율</span><b>10 %</b><i></i></li>
+                                        <li style="--n:0.5"><span>X<sub>2</sub> 선회 강도</span><b>100 %</b><i></i></li>
+                                        <li style="--n:0"><span>X<sub>3</sub> 1차 공기 유량</span><b>7000 Nm³/h</b><i></i></li>
+                                        <li style="--n:0"><span>X<sub>4</sub> 순산소 유량</span><b>1200 Nm³/h</b><i></i></li>
+                                        <li style="--n:-0.3"><span>X<sub>5</sub> 입자 크기</span><b>15 mm</b><i></i></li>
+                                        <li style="--n:0.214"><span>X<sub>6</sub> 이송 공기 속도</span><b>25 m/s</b><i></i></li>
+                                        <li style="--n:-0.48"><span>z<sub>pos</sub> 축 방향 위치</span><b>ẑ = 0.020</b><i></i></li>
+                                    </ul>
+                                    <p class="lab-hint">막대는 [−0.5, 0.5]로 정규화한 값이다. 조건 범위는 원고 Table 2를 따른다.</p>
+                                </fieldset>
+                            </aside>
+                        </div>
+
+                        <div class="lab-paper">
+                            <div class="lab-paper-head">
+                                <h3 class="lab-card-title">원고 결과</h3>
+                                <span class="lab-paper-cond">정상 상태 CFD 52사례(학습 45 · 검증 7) · 사례당 단면 501개 · 512 × 512 × 5 → 64 × 64 × 4 잠재 공간 · DDIM 25단계</span>
+                            </div>
+                            <div class="lab-paper-grid">
+                                <div class="lab-metric"><span class="lab-metric-value">9.9 K</span><span class="lab-metric-label">검증 사례 단면 평균 온도 오차 (학습 사례 3.6 K)</span></div>
+                                <div class="lab-metric"><span class="lab-metric-value">2.2×</span><span class="lab-metric-label">5개 장 정규화 MAE 감소 (0.895 vs CVAE 1.931)</span></div>
+                                <div class="lab-metric"><span class="lab-metric-value">10–19×</span><span class="lab-metric-label">축 방향 비물리적 진동 감소 (온도 peak count error)</span></div>
+                                <div class="lab-metric"><span class="lab-metric-value">1.14 s</span><span class="lab-metric-label">단면당 추론 시간 (사례당 ≈ 9.5분, 7.7 GB)</span></div>
+                            </div>
+                            <p class="lab-note">잠재 변수 타일과 잡음–단면 혼합은 DDIM sampling의 개념적 표현이며, 최종 단면은 원고 Fig. 16(b)의 검증 사례 예측(버너 인근)을 사용하였다. 출처: J. Yun et al., "Physics-conditioned latent diffusion surrogate for high-resolution multi-field prediction and rapid process screening of industrial kiln combustion," 심사 중 원고, 2026.</p>
+                        </div>
+
+                        <template data-caption="problem">대체 연료 전환은 화염의 당량 조건과 열 방출 분포, 오염물질 생성을 변화시키므로, 넓은 운전 조건 공간을 신속하게 선별할 수단이 필요하다. 고충실도 반응 유동 CFD(약 750만 격자, realizable k–ε 모델)를 조건마다 반복하기에는 계산 비용이 크다.</template>
+                        <template data-caption="data">7개 조건 변수(대체 연료 대체율, 선회 강도, 1차 공기 유량, 순산소 유량, 입자 크기, 이송 공기 속도, 축 방향 위치)를 [−0.5, 0.5]로 정규화하여 조건 벡터로 사용한다. 축 방향 수송의 물리적 연속성을 이용하여 각 3차원 사례를 Δz = 0.05 m 간격의 단면 501개로 분해하였으며, 학습 사례 45개로부터 22,545개의 학습 표본을 구성하였다.</template>
+                        <template data-caption="diffusion">조건 벡터는 MLP(7 → 256 → 512 → 768)를 거쳐 77 × 768 조건 토큰으로 변환되고, U-Net이 64 × 64 × 4 잠재 공간에서 25단계 DDIM sampling으로 잡음을 제거한다. VAE decoder가 이를 512 × 512 해상도의 5개 장으로 복원한다.</template>
+                        <template data-caption="reconstruct">축 방향 위치를 바꾸며 단면 501개를 생성하고 적층하여 3차원 장을 재구성한다. 단면당 추론 시간은 1,140 ms로, 사례 하나에 약 9.5분이 소요된다(소비자용 GPU 1대, 메모리 7.7 GB).</template>
+                        <template data-caption="compare">동일한 VAE decoder와 조건 벡터를 공유하는 6개 대리 모델을 비교하였다. 전체 재학습 확산 모델(SD Full)은 5개 장 정규화 MAE 0.895로 가장 낮았으며, 반복적인 확산 과정은 단일 추론 대리 모델 대비 축 방향의 비물리적 진동(peak count error)을 10–19배 줄였다. CO₂와 CO의 MAE는 CVAE가 가장 낮았다.</template>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-section detail-section-alt">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Background</span>
+                    <h2 class="section-title">대체 연료 전환과 신속한 공정 선별</h2>
+                    <p class="section-subtitle">제한된 CFD 자료로 넓은 운전 조건 공간에서 고해상도 반응 유동장을 예측하는 것이 핵심 과제이다.</p>
+                </div>
+                <div class="detail-section-grid">
+                    <article class="detail-card">
+                        <h3 class="detail-card-title">문제 배경</h3>
+                        <p>시멘트 소성로는 에너지와 배출 집약도가 높은 공정으로, 미분탄을 폐합성수지(waste synthetic resin, WSR) 등 대체 고형 연료로 대체하는 탈탄소화 전략이 중요하다. 연료 대체는 조성 변동성을 증가시켜 화염의 당량 조건, 열 방출 분포, 오염물질 생성을 바꾼다.</p>
+                        <p>본 연구는 3차원 CFD 사례를 축 방향 단면으로 분해하는 자료 구성 전략과 조건부 latent diffusion 구조를 결합하여, 제한된 CFD 자료로 5개 결합 반응 유동장을 예측하였다.</p>
+                    </article>
+                    <article class="detail-card">
+                        <h3 class="detail-card-title">자료와 모델 구성</h3>
+                        <ul class="detail-list">
+                            <li>자료: 정상 상태 CFD 52사례(one-at-a-time 설계, 학습 45 · 검증 7), 사례당 Δz = 0.05 m 간격 단면 501개</li>
+                            <li>부호화: VAE(83.7 M 매개변수)로 512 × 512 × 5 장을 64 × 64 × 4 잠재 공간으로 압축</li>
+                            <li>생성: 조건 토큰(77 × 768)을 입력으로 하는 U-Net, v-prediction(T = 1000), DDIM 25단계</li>
+                            <li>학습 방식: 전체 재학습(905.7 M 학습 매개변수)과 adapter 학습(46.1 M; 학습 시간 23.4%, 최대 메모리 44.5% 절감)</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-section" id="figures">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Key Figures</span>
+                    <h2 class="section-title">학습 자료, 예측 단면 및 축 방향 분포</h2>
+                </div>
+                <div class="detail-figure-grid">
+                    <figure class="detail-figure-card">
+                        <img src="../../assets/research/kiln-surrogate/kiln-cfd-domain-mesh-temperature.jpg" alt="Computational mesh and axial-center-plane temperature field of the kiln" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">계산 격자와 대표 운전 조건의 축 중심 단면 온도장. 원고 Fig. 2.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card">
+                        <img src="../../assets/research/kiln-surrogate/kiln-conditioning-space-train-validation.png" alt="Pairwise scatter-plot matrix of the conditioning vectors for training and validation cases" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">학습(●)과 검증(■) 사례의 조건 벡터 쌍별 산점도 행렬. 원고 Fig. 3.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card wide">
+                        <img src="../../assets/research/kiln-surrogate/kiln-five-field-axial-cross-sections.jpg" alt="Cross-sectional distributions of axial velocity, species mass fractions and temperature at successive axial positions" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">축 방향 위치에 따른 단면 분포(축 방향 속도, CO, CO₂, H₂O, NO 질량 분율, 온도). 목표 장의 다중 규모 구조를 보여 준다. 원고 Fig. 4.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card wide">
+                        <img src="../../assets/research/kiln-surrogate/kiln-validation-near-burner-five-field-full-retraining.jpg" alt="Near-burner cross-sectional comparison for a validation sample using full retraining" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">버너 인근 검증 단면(ẑ = 0.020)의 비교: (a) CFD 기준 해, (b) 전체 재학습 대리 모델 예측, (c) 절대 오차, 하단: 방위각 평균 파워 스펙트럼. 이 단면의 5개 장 정규화 MSE는 2.81 × 10<sup>−4</sup>이다. 원고 Fig. 16.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card">
+                        <img src="../../assets/research/kiln-surrogate/kiln-axial-profiles-case7-six-surrogates.jpg" alt="Cross-sectionally averaged axial profiles for validation case 7 across six surrogates" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">가장 어려운 검증 사례(Case 7, X<sub>1</sub> = 40%)의 단면 평균 축 방향 분포: (a) SD Full, (b) SD Adapter, (c) PCA+MLP, (d) Deterministic, (e) CVAE, (f) DeepONet. 전체 재학습 모델이 전역 축 방향 경향을 더 적은 진동으로 따른다. 원고 Fig. 12.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card">
+                        <img src="../../assets/research/kiln-surrogate/kiln-validation-slice-error-full-vs-adapter.png" alt="Validation-case slice-level mean pointwise absolute error for full retraining and adapter learning" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">검증 사례별 단면 평균 절대 오차: (a) 전체 재학습, (b) adapter 학습. 온도 오차의 사례 평균은 각각 9.9 K, 27.1 K이다. 원고 Fig. 10.</figcaption>
+                    </figure>
+                </div>
+                <p class="detail-figure-credit">그림: J. Yun et al., 심사 중 원고(2026).</p>
+            </div>
+        </section>
+
+        <section class="detail-section detail-section-alt" id="results">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Main Results</span>
+                    <h2 class="section-title">제한된 CFD 자료에서의 고해상도 다중 물리장 예측</h2>
+                    <p class="section-subtitle">전체 재학습 확산 모델은 버너 인근의 급격한 구배와 선회에 의한 비대칭 구조를 재현하였다.</p>
+                </div>
+                <div class="detail-result-grid detail-result-grid-4">
+                    <div class="detail-result-card">
+                        <span class="detail-result-value">9.9 K</span>
+                        <span class="detail-result-label">Mean slice-level temperature error, validation (training 3.6 K)</span>
+                    </div>
+                    <div class="detail-result-card">
+                        <span class="detail-result-value">29.6×</span>
+                        <span class="detail-result-label">Lower near-burner MSE than adapter learning on the validation slice</span>
+                    </div>
+                    <div class="detail-result-card">
+                        <span class="detail-result-value">29.5 dB</span>
+                        <span class="detail-result-label">Five-field PSNR (other surrogates 20.9–28.0 dB)</span>
+                    </div>
+                    <div class="detail-result-card">
+                        <span class="detail-result-value">O(10³)</span>
+                        <span class="detail-result-label">Speedup relative to direct CFD for a full 3D case</span>
+                    </div>
+                </div>
+                <article class="detail-card">
+                    <h3 class="detail-card-title">해석</h3>
+                    <p>버너 인근의 화염 안정화 영역은 가장 급격한 구배가 나타나는 영역이며, 전체 재학습 모델은 이 영역의 검증 단면에서 adapter 학습 대비 29.6배 낮은 MSE를 보였다. 전체 재학습 모델은 학습 표본에서 선회에 의한 나선형 비대칭과 C자형 생성물 분포를 재현하였으며, adapter 학습은 대규모 반경 방향 온도 성층은 포착하였으나 미세한 화염 경계와 접선 방향 비대칭을 놓쳤다.</p>
+                    <p>CO는 당량면을 가로지르는 급격한 구배 때문에 가장 예측하기 어려운 장이었다. 입자 크기는 주로 연소 완료 시점에 영향을 주었고, 학습 범위를 넘는 연료 대체율의 외삽이 더 어려웠다. 이러한 결과는 확산 기반 대리 모델이 제한된 CFD 자료로도 산업 연소 공정의 반복적인 공정 선별을 지원할 수 있음을 보여 준다.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="detail-section" id="outputs">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Related Outputs</span>
+                    <h2 class="section-title">논문</h2>
+                </div>
+                <div class="detail-related-list">
+                    <article class="detail-related-item">
+                        <span class="detail-related-meta">Under Review</span>
+                        <h3>심사 중 원고 2026</h3>
+                        <p>J. Yun et al., "Physics-conditioned latent diffusion surrogate for high-resolution multi-field prediction and rapid process screening of industrial kiln combustion." 게재가 확정되면 서지 정보를 추가한다.</p>
+                    </article>
+                    <article class="detail-related-item">
+                        <span class="detail-related-meta">Related Work</span>
+                        <h3>선박 운항 다목적 최적화</h3>
+                        <p>대리 모델을 반복 평가가 필요한 의사결정에 결합하는 연구 흐름은 항만 사례의 물리 기반 다목적 최적화(Ocean Engineering 2026)로 이어진다. <a href="../mobo-port-optimization/index.html">선박 운항 다목적 최적화</a></p>
+                    </article>
+                </div>
+                <div class="detail-pager">
+                    <a href="../mobo-port-optimization/index.html" class="detail-pager-link">
+                        <small>Previous Research</small>
+                        <span>선박 운항 다목적 최적화</span>
+                    </a>
+                    <a href="../unsteady-distributed-forcing/index.html" class="detail-pager-link">
+                        <small>Next Research</small>
+                        <span>비정상 분포 가진</span>
+                    </a>
+                    <a href="../../index.html#highlights" class="detail-pager-link">
+                        <small>Back</small>
+                        <span>Research Highlights</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../../js/main.js?v=2026q3"></script>
+    <script type="module" src="../../js/lab/kiln.js?v=2026q3"></script>
+</body>
+</html>

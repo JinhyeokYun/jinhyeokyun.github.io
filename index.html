@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>윤진혁, Ph.D. | CFD &amp; Machine Learning</title>
+    <meta name="description" content="윤진혁 포트폴리오 — Computational Fluid Dynamics, Turbulence, Machine Learning, Physics-Informed Neural Networks, Multi-objective Optimization">
+    <meta name="color-scheme" content="light dark">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css?v=2026q3">
+</head>
+<body>
+    <!-- Fixed Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">JH Yun</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero" class="nav-link active">About</a></li>
+                <li><a href="#research" class="nav-link">Research</a></li>
+                <li><a href="#highlights" class="nav-link">Highlights</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#publications" class="nav-link">Publications</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#presentations" class="nav-link">Presentations</a></li>
+                <li><a href="#education" class="nav-link">Education</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section (About) -->
+    <section class="hero" id="hero">
+        <canvas class="hero-canvas" id="heroCanvas"></canvas>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-name">윤진혁 <span class="hero-name-en">Jinhyeok Yun, Ph.D.</span></h1>
+                    <p class="hero-title">한전원자력연료(KNF) · 열수력설계부 선임연구원</p>
+                    <p class="hero-tagline">CFD, surrogate modeling, and optimization for environmental and industrial flow systems</p>
+                    <div class="hero-pills">
+                        <span class="pill pill-email"><i class="fas fa-envelope"></i> jhyun@knfc.co.kr</span>
+                        <span class="pill pill-key"><i class="fas fa-wind"></i> Turbulence</span>
+                        <span class="pill pill-key"><i class="fas fa-sliders-h"></i> Flow Control</span>
+                        <span class="pill pill-key"><i class="fas fa-brain"></i> ML-CFD Surrogate Models</span>
+                        <span class="pill pill-key"><i class="fas fa-route"></i> Multi-objective Optimization</span>
+                        <span class="pill pill-key"><i class="fas fa-atom"></i> Physics-Informed Neural Networks</span>
+                        <span class="pill pill-key"><i class="fas fa-temperature-half"></i> Nuclear Thermal-Hydraulics</span>
+                    </div>
+                    <div class="hero-actions">
+                        <a href="#research" class="btn btn-primary"><i class="fas fa-microscope"></i> 연구 분야</a>
+                        <a href="#contact" class="btn btn-outline"><i class="fas fa-envelope"></i> 연락처</a>
+                    </div>
+                </div>
+                <div class="hero-photo">
+                    <div class="photo-frame">
+                        <img src="assets/images/profile.jpg" alt="윤진혁 프로필 사진" class="hero-photo-img" loading="eager" decoding="async">
+                    </div>
+                    <div class="photo-decoration"></div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Research Areas Section -->
+    <section class="section research" id="research">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Research Areas</span>
+                <h2 class="section-title">연구 분야</h2>
+                <p class="section-subtitle">전산유체역학(computational fluid dynamics, CFD)과 머신러닝(machine learning)을 결합한 유동 해석·제어·최적화</p>
+            </div>
+            <div class="research-grid">
+                <!-- Card 1 -->
+                <div class="research-card" data-aos="fade-up">
+                    <div class="research-card-icon">
+                        <svg viewBox="0 0 80 80" class="research-icon-svg">
+                            <circle cx="40" cy="40" r="30" fill="none" stroke="#3A8F8B" stroke-width="1.5" opacity="0.3"/>
+                            <path d="M20,40 Q30,20 40,40 Q50,60 60,40" fill="none" stroke="#1B3A5C" stroke-width="2"/>
+                            <path d="M20,35 Q30,55 40,35 Q50,15 60,35" fill="none" stroke="#3A8F8B" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="research-card-title">난류 유동 해석 및 제어</h3>
+                    <p class="research-card-desc">뭉툭한 물체(원형 실린더, 구, 반구) 주위 층류 및 난류 유동을 대상으로 비례 되먹임 제어와 비정상 분포 가진(unsteady distributed forcing) 기법을 개발하고, 탭(tab)을 이용한 난류 유동 제어의 메커니즘을 분석하였다.</p>
+                    <div class="research-card-tags">
+                        <span>Proportional Feedback</span>
+                        <span>Bluff Body</span>
+                        <span>DNS/LES</span>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="research-card" data-aos="fade-up" data-delay="100">
+                    <div class="research-card-icon">
+                        <svg viewBox="0 0 80 80" class="research-icon-svg">
+                            <circle cx="25" cy="30" r="6" fill="#1B3A5C" opacity="0.15"/>
+                            <circle cx="55" cy="30" r="6" fill="#3A8F8B" opacity="0.15"/>
+                            <circle cx="40" cy="55" r="6" fill="#1B3A5C" opacity="0.15"/>
+                            <line x1="25" y1="30" x2="55" y2="30" stroke="#1B3A5C" stroke-width="1.5"/>
+                            <line x1="25" y1="30" x2="40" y2="55" stroke="#3A8F8B" stroke-width="1.5"/>
+                            <line x1="55" y1="30" x2="40" y2="55" stroke="#1B3A5C" stroke-width="1.5"/>
+                            <circle cx="25" cy="30" r="4" fill="#1B3A5C"/>
+                            <circle cx="55" cy="30" r="4" fill="#3A8F8B"/>
+                            <circle cx="40" cy="55" r="4" fill="#1B3A5C"/>
+                        </svg>
+                    </div>
+                    <h3 class="research-card-title">머신러닝 기반 유동 제어 및 대리 모델</h3>
+                    <p class="research-card-desc">인공신경망 기반 벽 압력 센서를 이용한 반대 제어, 평면 대칭성 보장 신경망(FCNN-PS) 기반 비례 제어, 희소 센서 기반 유동장 복원(PI-E-DON), 소성로 연소의 3차원 다중 물리장 대리 모델(surrogate model)을 연구하였다.</p>
+                    <div class="research-card-tags">
+                        <span>PINN</span>
+                        <span>DeepONet</span>
+                        <span>FNO</span>
+                        <span>Stable Diffusion</span>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="research-card" data-aos="fade-up" data-delay="200">
+                    <div class="research-card-icon">
+                        <svg viewBox="0 0 80 80" class="research-icon-svg">
+                            <rect x="15" y="25" width="50" height="35" rx="4" fill="none" stroke="#1B3A5C" stroke-width="1.5"/>
+                            <polyline points="20,55 35,40 45,48 60,30" fill="none" stroke="#3A8F8B" stroke-width="2"/>
+                            <circle cx="35" cy="40" r="2.5" fill="#3A8F8B"/>
+                            <circle cx="45" cy="48" r="2.5" fill="#3A8F8B"/>
+                            <circle cx="60" cy="30" r="2.5" fill="#1B3A5C"/>
+                        </svg>
+                    </div>
+                    <h3 class="research-card-title">산업 응용 및 최적화</h3>
+                    <p class="research-card-desc">누출 시나리오 기반 오염물질 확산 예측, qLogEHVI 기반 다목적 베이지안 최적화(multi-objective Bayesian optimization)를 이용한 선박 경로·속도 정책 도출, 대리 모델을 이용한 산업 공정의 운전 조건 선별을 연구하였다.</p>
+                    <div class="research-card-tags">
+                        <span>Bayesian Optimization</span>
+                        <span>Surrogate Model</span>
+                        <span>Industrial CFD</span>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="research-card" data-aos="fade-up" data-delay="300">
+                    <div class="research-card-icon">
+                        <svg viewBox="0 0 80 80" class="research-icon-svg">
+                            <rect x="15" y="20" width="22" height="16" rx="2" fill="none" stroke="#1B3A5C" stroke-width="1.5"/>
+                            <rect x="43" y="20" width="22" height="16" rx="2" fill="none" stroke="#3A8F8B" stroke-width="1.5"/>
+                            <rect x="29" y="46" width="22" height="16" rx="2" fill="none" stroke="#1B3A5C" stroke-width="1.5"/>
+                            <line x1="26" y1="36" x2="40" y2="46" stroke="#3A8F8B" stroke-width="1.5"/>
+                            <line x1="54" y1="36" x2="40" y2="46" stroke="#1B3A5C" stroke-width="1.5"/>
+                        </svg>
+                    </div>
+                    <h3 class="research-card-title">In-house 솔버 및 ML–CFD 연동 플랫폼</h3>
+                    <p class="research-card-desc">가상 경계 기법(immersed boundary method) 기반 in-house 솔버와 Fortran–Python 통합 ML–CFD 환경을 구축하고, 강화학습 기반 유동 제어를 위한 실시간 양방향 연동 플랫폼을 개발하였다.</p>
+                    <div class="research-card-tags">
+                        <span>IBM Solver</span>
+                        <span>Fortran-Python</span>
+                        <span>RL Platform</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Highlights Section -->
+    <section class="section highlights" id="highlights">
+        <div class="container">
+            <div class="section-header section-header-light">
+                <span class="section-label">Research Highlights</span>
+                <h2 class="section-title">주요 연구 성과</h2>
+                <p class="section-subtitle">유동 제어에서 예측 기반 의사결정으로 — 센싱, 모델, 작동·결정의 결합</p>
+            </div>
+
+            <div class="lineage-flow" aria-hidden="true">
+                <div class="lineage-stage" data-stage="sense"><span class="lineage-stage-num">01</span><strong>센싱</strong><small>Sensing</small></div>
+                <i class="lineage-arrow"></i>
+                <div class="lineage-stage" data-stage="model"><span class="lineage-stage-num">02</span><strong>모델</strong><small>Model</small></div>
+                <i class="lineage-arrow"></i>
+                <div class="lineage-stage" data-stage="act decide"><span class="lineage-stage-num">03</span><strong>작동 · 결정</strong><small>Actuation · Decision</small></div>
+            </div>
+
+            <div class="lineage-track">
+                <div class="lineage-track-head">
+                    <h3 class="lineage-track-title">유동 제어</h3>
+                    <span class="lineage-track-meta">석·박사 과정 · 아주대학교 · 2016–2023</span>
+                </div>
+                <div class="lineage-row lineage-row-4">
+                    <article class="lineage-card" data-stages="sense act">
+                        <a class="lineage-link" href="research/channel-opposition-control/index.html">
+                            <div class="lineage-card-head">
+                                <span class="highlight-tag">F</span>
+                                <span class="lineage-src">석사학위 논문 2018</span>
+                            </div>
+                            <canvas class="lineage-anim" data-anim="channel" aria-hidden="true"></canvas>
+                            <h4 class="lineage-title">난류 채널 유동 반대 제어</h4>
+                            <p class="lineage-purpose">벽 압력 분포로 벽 근처 수직 방향 속도를 예측하는 ANN 센서를 구성하고, 이를 이용하여 반대 제어를 수행하였다.</p>
+                            <dl class="lineage-metrics">
+                                <div><dt>−16.1%</dt><dd>항력 (Re<sub>τ</sub> = 177)</dd></div>
+                                <div><dt>R ≈ 0.85</dt><dd>예측 상관계수</dd></div>
+                            </dl>
+                            <span class="lineage-more">상세 보기</span>
+                        </a>
+                    </article>
+                    <article class="lineage-card" data-stages="act">
+                        <a class="lineage-link" href="research/unsteady-distributed-forcing/index.html">
+                            <div class="lineage-card-head">
+                                <span class="highlight-tag">C</span>
+                                <span class="lineage-src">박사학위 논문 2023</span>
+                            </div>
+                            <canvas class="lineage-anim" data-anim="udf" aria-hidden="true"></canvas>
+                            <h4 class="lineage-title">비정상 분포 가진</h4>
+                            <p class="lineage-purpose">스팬 방향으로 이동하는 분포 가진으로 경사 보텍스 쉐딩을 형성하여 원형 실린더 난류 후류를 안정화하였다.</p>
+                            <dl class="lineage-metrics">
+                                <div><dt>−43.1%</dt><dd>평균 항력 (Re = 3900)</dd></div>
+                                <div><dt>−98.8%</dt><dd>양력 섭동</dd></div>
+                            </dl>
+                            <span class="lineage-more">상세 보기</span>
+                        </a>
+                    </article>
+                    <article class="lineage-card" data-stages="sense act">
+                        <a class="lineage-link" href="research/proportional-feedback-control/index.html">
+                            <div class="lineage-card-head">
+                                <span class="highlight-tag">E</span>
+                                <span class="lineage-src">Phys. Fluids 2022</span>
+                            </div>
+                            <canvas class="lineage-anim" data-anim="pcontrol" aria-hidden="true"></canvas>
+                            <h4 class="lineage-title">비례 되먹임 제어</h4>
+                            <p class="lineage-purpose">시간·스팬 방향 평균 센싱 속도에 비례하는 분사/흡입으로 Kármán 보텍스 쉐딩을 억제하였다.</p>
+                            <dl class="lineage-metrics">
+                                <div><dt>−61%</dt><dd>양력 섭동 (Re = 3900)</dd></div>
+                                <div><dt>111–167</dt><dd>제어 효율 η<sub>a</sub></dd></div>
+                            </dl>
+                            <span class="lineage-more">상세 보기</span>
+                        </a>
+                    </article>
+                    <article class="lineage-card" data-stages="sense model act">
+                        <a class="lineage-link" href="research/symmetry-preserving-control/index.html">
+                            <div class="lineage-card-head">
+                                <span class="highlight-tag">D</span>
+                                <span class="lineage-src">박사학위 논문 2023</span>
+                            </div>
+                            <canvas class="lineage-anim" data-anim="symmetry" aria-hidden="true"></canvas>
+                            <h4 class="lineage-title">대칭성 보장 신경망 제어</h4>
+                            <p class="lineage-purpose">평면 대칭성을 구조적으로 보장하는 신경망(FCNN-PS)으로 벽 압력에서 센싱 속도를 예측하여 비례 제어를 수행하였다.</p>
+                            <dl class="lineage-metrics">
+                                <div><dt>−67.2%</dt><dd>양력 섭동 (Re = 3900)</dd></div>
+                                <div><dt>완전 제거</dt><dd>보텍스 쉐딩 (Re = 60)</dd></div>
+                            </dl>
+                            <span class="lineage-more">상세 보기</span>
+                        </a>
+                    </article>
+                </div>
+            </div>
+
+            <div class="lineage-track">
+                <div class="lineage-track-head">
+                    <h3 class="lineage-track-title">예측 기반 의사결정</h3>
+                    <span class="lineage-track-meta">박사후 연구 · 2023–2026</span>
+                </div>
+                <div class="lineage-row lineage-row-2">
+                    <article class="lineage-card" data-stages="model">
+                        <a class="lineage-link" href="research/kiln-surrogate/index.html">
+                            <div class="lineage-card-head">
+                                <span class="highlight-tag">B</span>
+                                <span class="lineage-src">심사 중 원고 2026</span>
+                            </div>
+                            <canvas class="lineage-anim" data-anim="kiln" aria-hidden="true"></canvas>
+                            <h4 class="lineage-title">소성로 3차원 대리 모델</h4>
+                            <p class="lineage-purpose">조건부 latent diffusion으로 산업용 소성로 연소의 5개 반응 유동장을 예측하고 3차원 장을 재구성하였다.</p>
+                            <dl class="lineage-metrics">
+                                <div><dt>9.9 K</dt><dd>검증 온도 오차</dd></div>
+                                <div><dt>≈ 9.5 min</dt><dd>3차원 사례 재구성</dd></div>
+                            </dl>
+                            <span class="lineage-more">상세 보기</span>
+                        </a>
+                    </article>
+                    <article class="lineage-card" data-stages="sense model decide">
+                        <a class="lineage-link" href="research/mobo-port-optimization/index.html">
+                            <div class="lineage-card-head">
+                                <span class="highlight-tag">A</span>
+                                <span class="lineage-src">Ocean Engineering 2026</span>
+                            </div>
+                            <canvas class="lineage-anim" data-anim="port" aria-hidden="true"></canvas>
+                            <h4 class="lineage-title">선박 운항 다목적 최적화</h4>
+                            <p class="lineage-purpose">희소 센서 기반 유동장 복원과 다목적 베이지안 최적화로 연료 소비와 최대 노출을 줄이는 경로·속도 정책을 도출하였다.</p>
+                            <dl class="lineage-metrics">
+                                <div><dt>34–78%</dt><dd>최대 노출 감소</dd></div>
+                                <div><dt>+20–35%</dt><dd>hypervolume</dd></div>
+                            </dl>
+                            <span class="lineage-more">상세 보기</span>
+                        </a>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills & Tools Section -->
+    <section class="section skills" id="skills">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Skills &amp; Tools</span>
+                <h2 class="section-title">전문 분야 및 도구</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-group" data-aos="fade-up">
+                    <h3 class="skill-group-title"><i class="fas fa-cogs"></i> Classical Mechanics</h3>
+                    <div class="skill-tags">
+                        <span>Fluid Dynamics</span>
+                        <span>Thermodynamics</span>
+                        <span>Solid Mechanics</span>
+                        <span>Dynamics</span>
+                    </div>
+                </div>
+                <div class="skill-group" data-aos="fade-up">
+                    <h3 class="skill-group-title"><i class="fas fa-water"></i> CFD</h3>
+                    <div class="skill-tags">
+                        <span>Immersed Boundary Method</span>
+                        <span>Fractional Step Method</span>
+                        <span>Passive Scalar Transport</span>
+                    </div>
+                </div>
+                <div class="skill-group" data-aos="fade-up">
+                    <h3 class="skill-group-title"><i class="fas fa-wind"></i> Turbulence</h3>
+                    <div class="skill-tags">
+                        <span>DNS</span>
+                        <span>LES</span>
+                        <span>RANS</span>
+                        <span>Passive Control</span>
+                        <span>Active Control</span>
+                    </div>
+                </div>
+                <div class="skill-group" data-aos="fade-up">
+                    <h3 class="skill-group-title"><i class="fas fa-brain"></i> Machine Learning</h3>
+                    <div class="skill-tags">
+                        <span>PINN</span>
+                        <span>DeepONet</span>
+                        <span>Fourier Neural Operator</span>
+                        <span>Stable Diffusion</span>
+                        <span>Supervised Learning</span>
+                        <span>Reinforcement Learning</span>
+                    </div>
+                </div>
+                <div class="skill-group" data-aos="fade-up">
+                    <h3 class="skill-group-title"><i class="fas fa-code"></i> Languages</h3>
+                    <div class="skill-tags">
+                        <span>Fortran</span>
+                        <span>Python</span>
+                        <span>Matlab</span>
+                    </div>
+                </div>
+                <div class="skill-group" data-aos="fade-up">
+                    <h3 class="skill-group-title"><i class="fas fa-cubes"></i> Libraries</h3>
+                    <div class="skill-tags">
+                        <span>TensorFlow</span>
+                        <span>PyTorch</span>
+                        <span>NVIDIA Modulus</span>
+                        <span>OpenMP</span>
+                    </div>
+                </div>
+                <div class="skill-group" data-aos="fade-up">
+                    <h3 class="skill-group-title"><i class="fas fa-laptop-code"></i> Software</h3>
+                    <div class="skill-tags">
+                        <span>ANSYS Fluent (UDF)</span>
+                        <span>SolidWorks</span>
+                        <span>Tecplot</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section class="section publications" id="publications">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Publications</span>
+                <h2 class="section-title">논문 실적</h2>
+                <p class="section-subtitle">제1저자 5편 · 공동저자 3편</p>
+            </div>
+
+            <div class="pub-category">
+                <h3 class="pub-category-title"><span class="pub-badge first">1st Author</span> 제1저자 논문</h3>
+                <div class="pub-list">
+                    <div class="pub-item">
+                        <span class="pub-number">01</span>
+                        <div class="pub-content">
+                            <p class="pub-authors"><strong>J. Yun</strong>, S. Park, and D. Kim</p>
+                            <p class="pub-title">"Physics-informed multi-objective optimization for fuel consumption and air-pollutant exposure in ship operations"</p>
+                            <p class="pub-journal"><em>Ocean Engineering</em>, 362, 126293, 2026</p>
+                        </div>
+                        <span class="pub-year-badge">2026</span>
+                    </div>
+                    <div class="pub-item">
+                        <span class="pub-number">02</span>
+                        <div class="pub-content">
+                            <p class="pub-authors"><strong>J. Yun</strong> and J. Lee</p>
+                            <p class="pub-title">"Active proportional feedback control of turbulent flow over a circular cylinder with averaged velocity sensor"</p>
+                            <p class="pub-journal"><em>Physics of Fluids</em>, 34(9), 095133, 2022</p>
+                        </div>
+                        <span class="pub-year-badge">2022</span>
+                    </div>
+                    <div class="pub-item">
+                        <span class="pub-number">03</span>
+                        <div class="pub-content">
+                            <p class="pub-authors"><strong>J. Yun</strong> and J. Lee</p>
+                            <p class="pub-title">"Prediction of Near-Wake Velocity in Laminar Flow over a Circular Cylinder Using Neural Networks with Instantaneous Wall Pressure Input"</p>
+                            <p class="pub-journal"><em>Applied Sciences</em>, 13(12), 6891, 2023</p>
+                        </div>
+                        <span class="pub-year-badge">2023</span>
+                    </div>
+                    <div class="pub-item">
+                        <span class="pub-number">04</span>
+                        <div class="pub-content">
+                            <p class="pub-authors"><strong>윤진혁</strong>, 이정일</p>
+                            <p class="pub-title">"평균 센싱 속도를 이용한 Re=300의 반구 주위 층류 유동의 비례 되먹임 제어"</p>
+                            <p class="pub-journal"><em>대한기계학회논문집 B</em>, 47(3), 175-180, 2023</p>
+                        </div>
+                        <span class="pub-year-badge">2023</span>
+                    </div>
+                    <div class="pub-item">
+                        <span class="pub-number">05</span>
+                        <div class="pub-content">
+                            <p class="pub-authors"><strong>윤진혁</strong>, 이정일</p>
+                            <p class="pub-title">"저주파 통과 필터 처리된 센싱 속도 기반 원형 실린더 주위 난류 유동의 비례 되먹임 제어"</p>
+                            <p class="pub-journal"><em>대한기계학회논문집 B</em>, 47(4), 235-243, 2023</p>
+                        </div>
+                        <span class="pub-year-badge">2023</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pub-divider"></div>
+
+            <div class="pub-category">
+                <h3 class="pub-category-title"><span class="pub-badge co">Co-author</span> 공동저자 논문</h3>
+                <div class="pub-list">
+                    <div class="pub-item">
+                        <span class="pub-number">06</span>
+                        <div class="pub-content">
+                            <p class="pub-authors">J. Seo, <strong>J. Yun</strong>, and J. Lee</p>
+                            <p class="pub-title">"Control of Turbulent Flow over a Circular Cylinder Using Tabs"</p>
+                            <p class="pub-journal"><em>Mathematics</em>, 11(4), 968, 2023</p>
+                        </div>
+                        <span class="pub-year-badge">2023</span>
+                    </div>
+                    <div class="pub-item">
+                        <span class="pub-number">07</span>
+                        <div class="pub-content">
+                            <p class="pub-authors">김금영, <strong>윤진혁</strong>, 이정일</p>
+                            <p class="pub-title">"상류 센서를 이용한 Re<sub>τ</sub>=395의 난류 채널 유동 반대 제어"</p>
+                            <p class="pub-journal"><em>대한기계학회논문집 B</em>, 47(3), 181-186, 2023</p>
+                        </div>
+                        <span class="pub-year-badge">2023</span>
+                    </div>
+                    <div class="pub-item">
+                        <span class="pub-number">08</span>
+                        <div class="pub-content">
+                            <p class="pub-authors">S. Park, K. Do, H. Kim, G. Park, <strong>J. Yun</strong>, and K. Kim</p>
+                            <p class="pub-title">"An Exploratory Study of Happiness and Unhappiness among Koreans Based on Text Mining Techniques"</p>
+                            <p class="pub-journal"><em>The Journal of the Korea Contents Association</em>, 18(7), 10-27, 2018</p>
+                        </div>
+                        <span class="pub-year-badge">2018</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section projects" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Projects</span>
+                <h2 class="section-title">연구 프로젝트</h2>
+                <p class="section-subtitle">수행 연구 과제</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-period">2025.01 – 2025.06</span>
+                        <h3 class="timeline-title">Main Burner 연료대체율에 따른 열유동 및 연소예측 모델 개발</h3>
+                        <p class="timeline-org"><i class="fas fa-building"></i> 태성에스엔이(주관), 부산대학교</p>
+                        <p class="timeline-desc">운전 조건을 입력으로 하는 소성로 연소의 3차원 다중 물리장 대리 모델을 개발하였다.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-period">2024.01 – 2026.06</span>
+                        <h3 class="timeline-title">인간 중심-탄소 중립 글로벌 공급망 연구센터 (ERC)</h3>
+                        <p class="timeline-org"><i class="fas fa-university"></i> 부산대학교(주관) | 산업체 11개, 공공기관 및 연구소 10개, 해외대학 11개, 부산광역시</p>
+                        <p class="timeline-desc">실시간 기상 예측과 항만 내 오염물질 누출·확산 예측을 위한 in-house 물리 기반 신경망(physics-informed neural network, PINN)을 개발하고, 항만 스케줄링 최적화를 수행하였다.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-period">2022.04 – 2023.12</span>
+                        <h3 class="timeline-title">화학사고 예방관리를 위한 감지경보체계 최적화 예측 및 운영기술 개발</h3>
+                        <p class="timeline-org"><i class="fas fa-flask"></i> 헤르스(주관), 명지대학교, 아주대학교, 켐토피아, 한국교통대학교</p>
+                        <p class="timeline-desc">화학물질 누출·확산 예측을 위한 in-house CFD 모델을 개발하고, 감지경보체계의 최적 운영 기술을 연구하였다.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-period">2021.06 – 2023.02</span>
+                        <h3 class="timeline-title">머신 러닝 기반 능동 피드백 유동 제어 기법 개발 및 3차원 형상 주위 난류 유동 제어</h3>
+                        <p class="timeline-org"><i class="fas fa-university"></i> 아주대학교</p>
+                        <p class="timeline-desc">in-house 학습·예측 코드와 난류 유동 능동 제어 코드를 개발하고, 학습된 신경망을 이용한 실시간 되먹임 제어 루프를 구현하였다.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-period">2019.06 – 2021.02</span>
+                        <h3 class="timeline-title">딥러닝을 이용한 난류 유동의 능동 제어 기법 개발</h3>
+                        <p class="timeline-org"><i class="fas fa-university"></i> 아주대학교</p>
+                        <p class="timeline-desc">머신러닝 학습·예측을 위한 in-house 코드를 개발하고, 심층 학습(deep learning) 기반 난류 유동 능동 제어 알고리즘을 설계·검증하였다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conference Presentations Section -->
+    <section class="section presentations" id="presentations">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Conference Presentations</span>
+                <h2 class="section-title">학술 발표</h2>
+                <p class="section-subtitle">총 21편 (구두 발표 15편, 기조 강연 1편) · 우수논문상 1편</p>
+            </div>
+            <div class="presentations-grid">
+                <!-- International -->
+                <div class="pres-column">
+                    <h3 class="pres-col-title"><i class="fas fa-globe-americas"></i> 국제 학술대회</h3>
+                    <div class="pres-list">
+                        <div class="pres-card">
+                            <div class="pres-card-header">
+                                <span class="pres-year">2024</span>
+                            </div>
+                            <h4 class="pres-conf">APS Division of Fluid Dynamics (DFD)</h4>
+                            <p class="pres-talk">Real-time prediction of turbulent flow using physics-informed neural networks with coarse spatiotemporal data</p>
+                            <p class="pres-detail">Salt Lake City, USA · 2024.11</p>
+                            <span class="pres-type oral">구두</span>
+                        </div>
+                        <div class="pres-card">
+                            <div class="pres-card-header">
+                                <span class="pres-year">2024</span>
+                            </div>
+                            <h4 class="pres-conf">Management Innovation Conference (MIC 2024)</h4>
+                            <p class="pres-talk">Physics-informed neural networks for real-time prediction as a surrogate model for optimization</p>
+                            <p class="pres-detail">Busan, Korea · 2024.10</p>
+                            <span class="pres-type oral">구두</span>
+                        </div>
+                        <div class="pres-card">
+                            <div class="pres-card-header">
+                                <span class="pres-year">2023</span>
+                            </div>
+                            <h4 class="pres-conf">ASME-JSME-KSME Fluids Engineering Division</h4>
+                            <p class="pres-talk">A periodically rotating distributed forcing of turbulent flow over a sphere for reductions of mean drag and lift fluctuations with a double-helix mode</p>
+                            <p class="pres-detail">Osaka, Japan · 2023.07</p>
+                            <span class="pres-type keynote">기조 강연</span>
+                        </div>
+                        <div class="pres-card">
+                            <div class="pres-card-header">
+                                <span class="pres-year">2019</span>
+                            </div>
+                            <h4 class="pres-conf">APS Division of Fluid Dynamics (DFD)</h4>
+                            <p class="pres-talk">Active feedback control of flow over a circular cylinder with wall pressure sensor using machine learning</p>
+                            <p class="pres-detail">Seattle, USA · 2019.11</p>
+                            <span class="pres-type oral">구두</span>
+                        </div>
+                        <div class="pres-card">
+                            <div class="pres-card-header">
+                                <span class="pres-year">2019</span>
+                            </div>
+                            <h4 class="pres-conf">ASME-JSME-KSME Joint Fluids Engineering (AJK-FED)</h4>
+                            <p class="pres-talk">Separation control of turbulent boundary layer using shear-free condition</p>
+                            <p class="pres-detail">San Francisco, USA · 2019.07</p>
+                            <span class="pres-type oral">구두</span>
+                        </div>
+                        <div class="pres-card">
+                            <div class="pres-card-header">
+                                <span class="pres-year">2018</span>
+                            </div>
+                            <h4 class="pres-conf">APS Division of Fluid Dynamics (DFD)</h4>
+                            <p class="pres-talk">Opposition control of turbulent channel flow with wall pressure using deep neural network</p>
+                            <p class="pres-detail">Atlanta, USA · 2018.11</p>
+                            <span class="pres-type oral">구두</span>
+                        </div>
+                        <div class="pres-card">
+                            <div class="pres-card-header">
+                                <span class="pres-year">2017</span>
+                            </div>
+                            <h4 class="pres-conf">JSME-KSME Thermal and Fluids Engineering</h4>
+                            <p class="pres-talk">Proportional control of turbulent flow over a circular cylinder</p>
+                            <p class="pres-detail">Okinawa, Japan · 2017.10</p>
+                            <span class="pres-type oral">구두</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Domestic -->
+                <div class="pres-column">
+                    <h3 class="pres-col-title"><i class="fas fa-flag"></i> 국내 학술대회</h3>
+                    <div class="pres-list">
+                        <div class="pres-card">
+                            <div class="pres-card-header">
+                                <span class="pres-year">2025</span>
+                            </div>
+                            <h4 class="pres-conf">대한기계학회 유체공학부문</h4>
+                            <p class="pres-talk">비정상 분포 가진을 통한 원형 실린더 난류 후류의 안정화</p>
+                            <p class="pres-detail">2025.04</p>
+                            <span class="pres-type oral">구두</span>
+                        </div>
+                        <div class="pres-card">
+                            <div class="pres-card-header">
+                                <span class="pres-year">2025</span>
+                            </div>
+                            <h4 class="pres-conf">대한기계학회 유체공학부문</h4>
+                            <p class="pres-talk">비정상 분포 가진 기법을 이용한 NACA0012 익형 주위 난류 유동의 제어</p>
+                            <p class="pres-detail">2025.04</p>
+                            <span class="pres-type general">발표</span>
+                        </div>
+                        <div class="pres-card">
+                            <div class="pres-card-header">
+                                <span class="pres-year">2024</span>
+                            </div>
+                            <h4 class="pres-conf">대한기계학회</h4>
+                            <p class="pres-talk">국소 성긴 센서를 이용한 DeepONet 기반 원형 실린더 주위 층류 유동의 후류 예측</p>
+                            <p class="pres-detail">2024.11</p>
+                            <span class="pres-type oral">구두</span>
+                        </div>
+                        <div class="pres-card">
+                            <div class="pres-card-header">
+                                <span class="pres-year">2023</span>
+                            </div>
+                            <h4 class="pres-conf">대한기계학회</h4>
+                            <p class="pres-talk">Re<sub>τ</sub> = 395와 590에서 상류 센서를 사용한 채널 난류 유동의 반대 제어</p>
+                            <p class="pres-detail">2023.05</p>
+                            <span class="pres-type general">발표</span>
+                        </div>
+                        <div class="pres-card">
+                            <div class="pres-card-header">
+                                <span class="pres-year">2023</span>
+                            </div>
+                            <h4 class="pres-conf">한국전산유체공학회</h4>
+                            <p class="pres-talk">대칭성을 보장하는 신경망 구조 및 이를 활용한 실린더 주위 유동의 되먹임 제어 연구</p>
+                            <p class="pres-detail">2023.05 · AI CFD 특별세션</p>
+                            <span class="pres-type general">발표</span>
+                        </div>
+                        <div class="pres-card">
+                            <div class="pres-card-header">
+                                <span class="pres-year">2022</span>
+                            </div>
+                            <h4 class="pres-conf">한국유체공학학술대회</h4>
+                            <p class="pres-talk">탭을 이용한 원형 실린더 주위 난류 유동 제어</p>
+                            <p class="pres-detail">2022.06</p>
+                            <span class="pres-type general">발표</span>
+                        </div>
+                        <div class="pres-card">
+                            <div class="pres-card-header">
+                                <span class="pres-year">2022</span>
+                            </div>
+                            <h4 class="pres-conf">한국유체공학학술대회</h4>
+                            <p class="pres-talk">대칭성 기반 인공신경망을 이용한 원형 실린더 주위 유동의 비례 되먹임 제어</p>
+                            <p class="pres-detail">2022.06</p>
+                            <span class="pres-type oral">구두</span>
+                        </div>
+                        <div class="pres-card">
+                            <div class="pres-card-header">
+                                <span class="pres-year">2021</span>
+                            </div>
+                            <h4 class="pres-conf">대한기계학회</h4>
+                            <p class="pres-talk">머신러닝 기반 실린더 주위 난류 유동의 능동 되먹임 제어</p>
+                            <p class="pres-detail">2021.08</p>
+                            <span class="pres-type general">발표</span>
+                        </div>
+                        <div class="pres-card">
+                            <div class="pres-card-header">
+                                <span class="pres-year">2020</span>
+                            </div>
+                            <h4 class="pres-conf">한국유체공학학술대회</h4>
+                            <p class="pres-talk">인공신경망 기반 벽 압력 센서를 이용한 실린더 주위 난류 유동의 비례 되먹임 제어</p>
+                            <p class="pres-detail">2020.08 · 구두 발표</p>
+                            <span class="pres-type award"><i class="fas fa-trophy"></i> 우수논문상</span>
+                        </div>
+                        <div class="pres-card">
+                            <div class="pres-card-header">
+                                <span class="pres-year">2019</span>
+                            </div>
+                            <h4 class="pres-conf">대한기계학회</h4>
+                            <p class="pres-talk">공간 평균된 속도 센서를 이용한 원형 실린더 주위 난류 유동의 비례 제어</p>
+                            <p class="pres-detail">2019.04</p>
+                            <span class="pres-type oral">구두</span>
+                        </div>
+                        <div class="pres-card">
+                            <div class="pres-card-header">
+                                <span class="pres-year">2018</span>
+                            </div>
+                            <h4 class="pres-conf">한국유체공학학술대회</h4>
+                            <p class="pres-talk">인공신경망 기반 벽 압력을 이용한 원형 실린더 주위 유동 속도 예측</p>
+                            <p class="pres-detail">2018.08</p>
+                            <span class="pres-type oral">구두</span>
+                        </div>
+                        <div class="pres-card">
+                            <div class="pres-card-header">
+                                <span class="pres-year">2018</span>
+                            </div>
+                            <h4 class="pres-conf">대한기계학회</h4>
+                            <p class="pres-talk">인공신경망 기반 벽 압력 센서를 이용한 난류 채널 유동 내 반대 제어</p>
+                            <p class="pres-detail">2018.04</p>
+                            <span class="pres-type oral">구두</span>
+                        </div>
+                        <div class="pres-card">
+                            <div class="pres-card-header">
+                                <span class="pres-year">2017</span>
+                            </div>
+                            <h4 class="pres-conf">대한기계학회</h4>
+                            <p class="pres-talk">인공신경망 기반 벽 압력을 이용한 난류 채널 유동 내 벽 근처 속도 예측</p>
+                            <p class="pres-detail">2017.11</p>
+                            <span class="pres-type oral">구두</span>
+                        </div>
+                        <div class="pres-card">
+                            <div class="pres-card-header">
+                                <span class="pres-year">2016</span>
+                            </div>
+                            <h4 class="pres-conf">대한기계학회</h4>
+                            <p class="pres-talk">반구 주위 유동의 비례 되먹임 제어</p>
+                            <p class="pres-detail">2016.12</p>
+                            <span class="pres-type oral">구두</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Career Section -->
+    <section class="section education" id="education">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Education &amp; Career</span>
+                <h2 class="section-title">학력 및 경력</h2>
+            </div>
+            <div class="edu-timeline">
+                <div class="edu-item current">
+                    <div class="edu-dot"></div>
+                    <div class="edu-card">
+                        <span class="edu-period">2026.06 – 현재</span>
+                        <h3 class="edu-title">선임연구원</h3>
+                        <p class="edu-org">한전원자력연료(KNF) · 열수력설계부</p>
+                        <span class="edu-type career">경력</span>
+                    </div>
+                </div>
+                <div class="edu-item">
+                    <div class="edu-dot"></div>
+                    <div class="edu-card">
+                        <span class="edu-period">2024.01 – 2026.06</span>
+                        <h3 class="edu-title">박사후연구원 → 연구교수</h3>
+                        <p class="edu-org">부산대학교 인간 중심-탄소 중립 글로벌 공급망 연구센터 (SCSC)</p>
+                        <p class="edu-org">부산대학교 산업공학과 리스크분석 연구실 (김도원 교수)</p>
+                        <span class="edu-type career">경력</span>
+                    </div>
+                </div>
+                <div class="edu-item">
+                    <div class="edu-dot"></div>
+                    <div class="edu-card">
+                        <span class="edu-period">2023.09 – 2023.12</span>
+                        <h3 class="edu-title">박사후연구원</h3>
+                        <p class="edu-org">아주대학교 기계공학과 · 전산유체실험실 (지도교수 이정일)</p>
+                        <span class="edu-type career">경력</span>
+                    </div>
+                </div>
+                <div class="edu-item">
+                    <div class="edu-dot"></div>
+                    <div class="edu-card">
+                        <span class="edu-period">2018.03 – 2023.08</span>
+                        <h3 class="edu-title">공학박사 (Ph.D.)</h3>
+                        <p class="edu-org">아주대학교 기계공학과 · 전산유체실험실 (지도교수 이정일)</p>
+                        <span class="edu-type edu">학력</span>
+                    </div>
+                </div>
+                <div class="edu-item">
+                    <div class="edu-dot"></div>
+                    <div class="edu-card">
+                        <span class="edu-period">2016.03 – 2018.02</span>
+                        <h3 class="edu-title">공학석사 (M.S.)</h3>
+                        <p class="edu-org">아주대학교 기계공학과 · 전산유체실험실 (지도교수 이정일)</p>
+                        <span class="edu-type edu">학력</span>
+                    </div>
+                </div>
+                <div class="edu-item">
+                    <div class="edu-dot"></div>
+                    <div class="edu-card">
+                        <span class="edu-period">2009.03 – 2016.02</span>
+                        <h3 class="edu-title">공학사 (B.S.)</h3>
+                        <p class="edu-org">아주대학교 기계공학과</p>
+                        <span class="edu-type edu">학력</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / Footer Section -->
+    <footer class="footer" id="contact">
+        <div class="footer-content">
+            <div class="container">
+                <div class="footer-main">
+                    <h2 class="footer-title">Contact</h2>
+                    <p class="footer-subtitle">연구 협력 및 문의</p>
+                    <div class="footer-info">
+                        <div class="footer-info-item">
+                            <i class="fas fa-user"></i>
+                            <span>윤진혁 (Jinhyeok Yun, Ph.D.)</span>
+                        </div>
+                        <div class="footer-info-item">
+                            <i class="fas fa-building"></i>
+                            <span>한전원자력연료(KNF) · 열수력설계부 선임연구원</span>
+                        </div>
+                        <div class="footer-info-item">
+                            <a href="mailto:jhyun@knfc.co.kr">
+                                <i class="fas fa-envelope"></i>
+                                <span>jhyun@knfc.co.kr</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2026 Jinhyeok Yun. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js?v=2026q3"></script>
+    <script type="module" src="js/lab/lineage.js?v=2026q3"></script>
+</body>
+</html>

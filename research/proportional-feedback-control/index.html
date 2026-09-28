@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비례 되먹임 제어 | 윤진혁</title>
+    <meta name="description" content="평균 센싱 속도를 이용한 뭉툭한 물체 주위 층류 및 난류 유동의 비례 되먹임 제어">
+    <meta name="color-scheme" content="light dark">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/style.css?v=2026q3">
+</head>
+<body class="research-detail-page">
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="../../index.html#hero" class="nav-logo">JH Yun</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../../index.html#highlights" class="nav-link">Home</a></li>
+                <li><a href="#overview" class="nav-link active">Overview</a></li>
+                <li><a href="#explore" class="nav-link">Model</a></li>
+                <li><a href="#figures" class="nav-link">Figures</a></li>
+                <li><a href="#results" class="nav-link">Results</a></li>
+                <li><a href="#outputs" class="nav-link">Related</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="detail-main">
+        <section class="detail-hero-section" id="overview">
+            <div class="container">
+                <div class="detail-breadcrumb">Research Highlight E</div>
+                <div class="detail-hero-grid">
+                    <div class="detail-hero-copy">
+                        <span class="detail-kicker">Practical Closed-Loop Control</span>
+                        <h1 class="detail-title">뭉툭한 물체 주위 층류 및 난류 유동의 비례 되먹임 제어</h1>
+                        <p class="detail-summary">본 연구는 단순한 제어 법칙과 소수의 센서로 구성된 실용적 되먹임 제어의 성능을 검토하였다. 후류 중심선에서 측정한 수직 방향(transverse) 센싱 속도에 시간 평균과 스팬 방향 평균을 적용하고, 그 값에 비례하여 실린더 표면에서 분사/흡입(blowing/suction) 가진을 가하는 비례 되먹임 제어(proportional feedback control)를 Re = 3900 원형 실린더 주위 난류 유동에 적용하였다. 자유 유동 속도의 1% 미만인 가진 속도로 평균 항력과 양력 섭동(lift fluctuations)을 함께 감소시켰다.</p>
+                        <div class="detail-keywords">
+                            <span class="detail-keyword">P Control</span>
+                            <span class="detail-keyword">Averaged Velocity Sensor</span>
+                            <span class="detail-keyword">Closed-Loop Control</span>
+                            <span class="detail-keyword">Re = 100 · 3900</span>
+                            <span class="detail-keyword">Control Efficiency</span>
+                        </div>
+                        <div class="detail-stat-grid">
+                            <div class="detail-stat-card">
+                                <span class="detail-stat-value">−61%</span>
+                                <span class="detail-stat-label">Lift fluctuations C<sub>L,rms</sub> at Re = 3900</span>
+                            </div>
+                            <div class="detail-stat-card">
+                                <span class="detail-stat-value">−11%</span>
+                                <span class="detail-stat-label">Mean drag C<sub>D</sub> at Re = 3900</span>
+                            </div>
+                            <div class="detail-stat-card">
+                                <span class="detail-stat-value">111–167</span>
+                                <span class="detail-stat-label">Control efficiency η<sub>a</sub> over the successful gains</span>
+                            </div>
+                        </div>
+                        <div class="detail-actions">
+                            <a href="#explore" class="btn btn-primary"><i class="fas fa-project-diagram"></i> 개념 모델</a>
+                            <a href="../../index.html#highlights" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Highlights로 돌아가기</a>
+                        </div>
+                    </div>
+                    <figure class="detail-hero-figure">
+                        <img src="../../assets/research/proportional-feedback-control/concept-schematic.jpg" alt="Schematic of the sensing location on the wake centerline and the blowing and suction slots on the cylinder for 2D laminar and 3D turbulent flow" class="detail-hero-image" loading="eager" decoding="async">
+                        <figcaption class="detail-hero-caption">센싱 위치 x<sub>s</sub>에서 수직 방향 속도 v<sub>s</sub>를 측정하고, 상·하면 슬롯에서 역위상의 분사/흡입(±ψ)을 가한다. (a) 2D 층류 Re = 100, (b) 3D 난류 Re = 3900. 난류에서는 스팬 방향 길이 L<sub>z</sub>에 걸쳐 센싱 속도를 평균한다. Phys. Fluids 34, 095133 (2022), FIG. 1.</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-section lab-section" id="explore" aria-labelledby="explore-title">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Conceptual Model</span>
+                    <h2 class="section-title" id="explore-title">평균 센싱 속도 기반 비례 되먹임 제어</h2>
+                    <p class="section-subtitle">센싱 위치 x<sub>s</sub>, 시간 평균 구간 T<sub>a</sub>, 비례 게인 α에 따른 제어 거동을 개념 모델로 나타낸다. 유동은 개념적 재현이며, 수치는 논문 결과를 따른다.</p>
+                </div>
+
+                <div class="lab" data-lab="pcontrol">
+                    <figure class="lab-fallback">
+                        <img src="../../assets/research/proportional-feedback-control/laminar-vorticity-re100.jpg" alt="Instantaneous spanwise vorticity at Re = 100 without and with proportional control" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">개념 모델은 JavaScript 환경에서 표시된다. 위 그림은 Re = 100에서 제어 전(a)과 후(b)의 와도장이다(Phys. Fluids 34, 095133 (2022), FIG. 13).</figcaption>
+                    </figure>
+
+                    <div class="lab-live" hidden>
+                        <div class="lab-toolbar">
+                            <div class="lab-steps" role="tablist" aria-label="설명 단계">
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-pc"><span class="lab-step-num">1</span>비제어 후류</button>
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-pc"><span class="lab-step-num">2</span>센싱</button>
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-pc"><span class="lab-step-num">3</span>비례 가진</button>
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-pc"><span class="lab-step-num">4</span>제어 결과</button>
+                                <button class="lab-step" role="tab" type="button" aria-controls="lab-stage-pc"><span class="lab-step-num">5</span>매개변수 탐색</button>
+                            </div>
+                            <div class="lab-transport">
+                                <div class="lab-seg" role="radiogroup" aria-label="유동 조건">
+                                    <label><input type="radio" name="lab-regime" value="turbulent" checked><span>난류 Re = 3900</span></label>
+                                    <label><input type="radio" name="lab-regime" value="laminar"><span>층류 Re = 100</span></label>
+                                </div>
+                                <button class="lab-btn" type="button" data-act="play" aria-label="애니메이션 일시정지">일시정지</button>
+                                <button class="lab-btn" type="button" data-act="reset">초기화</button>
+                            </div>
+                        </div>
+
+                        <div class="lab-stage" id="lab-stage-pc" role="tabpanel" aria-label="개념 모델 화면">
+                            <div class="lab-canvas-wrap">
+                                <canvas class="lab-canvas" role="img" aria-label="원형 실린더 후류 와도장의 개념 애니메이션. 제어 미적용."></canvas>
+                                <span class="lab-badge">개념 모델 · 논문 LES 결과 아님</span>
+                                <div class="lab-legend" aria-hidden="true"><span>−ω<sub>z</sub></span><i class="lab-colorbar"></i><span>+ω<sub>z</sub></span></div>
+                                <span class="lab-debug" hidden></span>
+                            </div>
+                            <p class="lab-caption"></p>
+                            <p class="lab-sr" aria-live="polite"></p>
+                        </div>
+
+                        <div class="lab-body">
+                            <div class="lab-chart-card">
+                                <div class="lab-chart-head">
+                                    <h3 class="lab-card-title">시간 이력</h3>
+                                    <span class="lab-chart-key"><span class="lab-key-item"><i class="lab-key lab-key-raw"></i>순간 센싱 속도</span><span class="lab-key-item"><i class="lab-key lab-key-avg"></i>평균 센싱 속도</span><span class="lab-key-item"><i class="lab-key lab-key-env"></i>비제어 유동 진폭</span><span class="lab-key-item"><i class="lab-key lab-key-ramp"></i>제어 개시 구간</span></span>
+                                </div>
+                                <div class="lab-chart-wrap"><canvas class="lab-chart" role="img" aria-label="센싱 속도, 가진 속도, 양력 계수, 항력 계수의 시간 이력 (개념 모델)"></canvas></div>
+                            </div>
+
+                            <aside class="lab-panel" aria-label="제어 조건">
+                                <button class="lab-btn lab-toggle lab-toggle-main" type="button" data-param="control" aria-pressed="false"><i class="fas fa-power-off" aria-hidden="true"></i> 제어</button>
+
+                                <fieldset class="lab-group">
+                                    <legend class="lab-group-title">센싱</legend>
+                                    <div class="lab-field">
+                                        <label for="lab-xs">센싱 위치 x<sub>s</sub>/d</label>
+                                        <output for="lab-xs"></output>
+                                        <div class="lab-range"><input id="lab-xs" type="range" min="0.6" max="4.5" step="0.01"><span class="lab-range-mark" data-mark="xs" aria-hidden="true"></span></div>
+                                    </div>
+                                    <div class="lab-fit-block">
+                                        <p class="lab-fit-title">위상 정합도 <span>개념</span></p>
+                                        <div class="lab-fit-wrap"><canvas class="lab-fit-canvas" aria-hidden="true"></canvas></div>
+                                        <p class="lab-fit-text"></p>
+                                    </div>
+                                    <div class="lab-field">
+                                        <label for="lab-ta">시간 평균 구간 T<sub>a</sub>u<sub>∞</sub>/d</label>
+                                        <output for="lab-ta"></output>
+                                        <div class="lab-range"><input id="lab-ta" type="range" min="0" max="5" step="0.02"><span class="lab-range-mark" data-mark="ta" aria-hidden="true"></span></div>
+                                    </div>
+                                    <div class="lab-field lab-field-inline">
+                                        <span class="lab-field-label">스팬 방향 평균 (8점)</span>
+                                        <button class="lab-btn lab-toggle lab-toggle-sm" type="button" data-param="spanwise" aria-pressed="true">적용</button>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset class="lab-group">
+                                    <legend class="lab-group-title">가진</legend>
+                                    <div class="lab-field">
+                                        <label for="lab-alpha">비례 게인 α</label>
+                                        <output for="lab-alpha"></output>
+                                        <div class="lab-range"><input id="lab-alpha" type="range" min="0" max="0.03" step="0.0005"><span class="lab-range-mark" data-mark="alpha" aria-hidden="true"></span></div>
+                                    </div>
+                                </fieldset>
+
+                                <div class="lab-group">
+                                    <p class="lab-group-title">대표 조건</p>
+                                    <div class="lab-presets">
+                                        <button class="lab-chip" type="button" data-preset="paper">논문 최적 조건</button>
+                                        <button class="lab-chip" type="button" data-preset="far">하류 센싱 (xₛ/d = 3.6)</button>
+                                        <button class="lab-chip" type="button" data-preset="raw">시간 평균 미적용</button>
+                                        <button class="lab-chip" type="button" data-preset="over">과도한 시간 평균</button>
+                                    </div>
+                                    <p class="lab-hint"><i class="lab-key lab-key-mark"></i>주황 눈금: 논문 최적 조건</p>
+                                </div>
+                            </aside>
+                        </div>
+
+                        <div class="lab-paper">
+                            <div class="lab-paper-head">
+                                <h3 class="lab-card-title">논문 결과</h3>
+                                <span class="lab-paper-cond" data-regime-text="turbulent">LES, Re = 3900 · x<sub>s</sub>/d = 1.69, T<sub>a</sub>u<sub>∞</sub>/d = 1.44, α = 0.01, 스팬 방향 64점 평균</span>
+                                <span class="lab-paper-cond" data-regime-text="laminar" hidden>2D, Re = 100 · x<sub>s</sub>/d = 1.5, T<sub>a</sub>u<sub>∞</sub>/d = 4.0, α = 0.4</span>
+                            </div>
+                            <div class="lab-paper-grid" data-regime-text="turbulent">
+                                <div class="lab-metric"><span class="lab-metric-value">−61%</span><span class="lab-metric-label">양력 섭동 C<sub>L,rms</sub></span></div>
+                                <div class="lab-metric"><span class="lab-metric-value">−11%</span><span class="lab-metric-label">평균 항력 C<sub>D</sub></span></div>
+                                <div class="lab-metric"><span class="lab-metric-value">−58%</span><span class="lab-metric-label">센싱 속도 rms</span></div>
+                                <div class="lab-metric"><span class="lab-metric-value">0.4%</span><span class="lab-metric-label">가진 속도 ψ<sub>rms</sub>/u<sub>∞</sub></span></div>
+                            </div>
+                            <div class="lab-paper-grid lab-paper-grid-one" data-regime-text="laminar" hidden>
+                                <div class="lab-metric"><span class="lab-metric-value">약화</span><span class="lab-metric-label">Kármán 보텍스 쉐딩 강도 — 완전 억제에는 이르지 않음 (FIG. 13)</span></div>
+                            </div>
+                            <p class="lab-note">보텍스 쉐딩의 진폭은 Stuart–Landau oscillator로 모델링하였으며, 센싱 위치·시간 평균·비례 게인이 제어 효과에 미치는 경향을 정성적으로 나타낸다. 수치는 모두 논문 값이다. 출처: J. Yun and J. Lee, <a href="https://doi.org/10.1063/5.0107561" target="_blank" rel="noopener">Phys. Fluids 34, 095133 (2022)</a>.</p>
+                        </div>
+
+                        <template data-caption="problem">원형 실린더 후류에서는 상·하면에서 박리된 유동이 교대로 와류를 형성하는 Kármán 보텍스 쉐딩(Kármán vortex shedding)이 발생하며, 이는 실린더가 받는 항력과 양력 섭동의 주요 원인이다.</template>
+                        <template data-caption="sensor">후류 중심선의 센싱 위치 x<sub>s</sub>에서 수직 방향 센싱 속도 v<sub>s</sub>를 측정한다. Re = 3900 난류에서는 순간 센싱 속도(회색)에 고주파 성분이 포함되므로, 시간 평균(T<sub>a</sub>)과 스팬 방향 평균을 적용한 신호(청록)를 사용하여 보텍스 쉐딩의 위상 정보를 추출한다.</template>
+                        <template data-caption="sensor-laminar">후류 중심선의 센싱 위치 x<sub>s</sub>에서 수직 방향 센싱 속도 v<sub>s</sub>를 측정한다. Re = 100 층류에서는 신호의 잡음이 작으며, 논문에서는 T<sub>a</sub>u<sub>∞</sub>/d = 4.0의 시간 평균을 적용한 신호(청록)를 사용하였다.</template>
+                        <template data-caption="control">평균 센싱 속도에 비례하여 상·하면 슬롯에서 역위상의 분사/흡입 가진을 가한다: ψ = α·e(t). 가진은 sigmoid 함수로 점진적으로 개시되며, 가진 속도는 자유 유동 속도의 1% 미만이다.</template>
+                        <template data-caption="result">보텍스 쉐딩이 약화되면서 양력 섭동과 평균 항력이 함께 감소한다. Re = 3900 LES에서 양력 섭동은 61%, 평균 항력은 11% 감소하였다.</template>
+                        <template data-caption="result-laminar">보텍스 쉐딩이 약화되면서 양력 섭동이 감소한다. Re = 100에서는 x<sub>s</sub>/d = 1.5, T<sub>a</sub>u<sub>∞</sub>/d = 4.0, α = 0.4 조건에서 보텍스 쉐딩 강도가 약화되었으나 완전 억제에는 이르지 않았다.</template>
+                        <template data-caption="explore">센싱 위치, 시간 평균 구간, 비례 게인에 따른 제어 거동을 비교한다. 센싱 신호가 보텍스 쉐딩과 적절한 위상 관계를 갖지 못하면 동일한 제어 법칙에서도 양력 섭동이 증가할 수 있다(예: 시간 평균을 적용하지 않은 경우, FIG. 9).</template>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-section detail-section-alt">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Background</span>
+                    <h2 class="section-title">단순한 되먹임 제어의 실용성</h2>
+                    <p class="section-subtitle">유동 제어의 실용성은 제어 성능뿐 아니라 센서 구성의 단순성과 제어 입력 동력을 함께 고려하여 평가해야 한다.</p>
+                </div>
+                <div class="detail-section-grid">
+                    <article class="detail-card">
+                        <h3 class="detail-card-title">문제 배경</h3>
+                        <p>다수의 능동 제어 기법은 높은 제어 성능을 보이지만, 복잡한 센서 구성이나 큰 제어 입력 동력을 요구하여 실제 적용성이 제한된다. 뭉툭한 물체(bluff body) 주위 유동 제어에서는 가진에 필요한 동력이 항력 감소로 절감되는 동력을 상회할 수 있다.</p>
+                        <p>본 연구는 실용적인 센서 구성과 단순한 제어 법칙을 유지하면서 유의미한 제어 성능을 얻을 수 있는지를 검토하였다.</p>
+                    </article>
+                    <article class="detail-card">
+                        <h3 class="detail-card-title">제어 전략</h3>
+                        <p>후류 중심선의 수직 방향 속도를 센싱 속도로 사용하되, 순간값 대신 시간 평균(T<sub>a</sub>)과 스팬 방향 평균을 적용한 값에 비례하여 상·하면 슬롯에서 역위상의 분사/흡입 가진을 가한다: ψ<sub>m</sub> = α·e(t).</p>
+                        <ul class="detail-list">
+                            <li>평균 센싱 속도는 난류의 고주파 성분을 제거하고 Kármán 보텍스 쉐딩의 위상을 안정적으로 추종한다</li>
+                            <li>센싱 위치 x<sub>s</sub>와 시간 평균 구간 T<sub>a</sub>는 양력과 센싱 속도 시간 미분의 상관관계로 선정하였다</li>
+                            <li>가진 속도의 rms는 자유 유동 속도의 0.4%이다(ψ<sub>rms</sub>/u<sub>∞</sub> = 0.004)</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-section" id="figures">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Key Figures</span>
+                    <h2 class="section-title">평균 센싱이 제어 성능에 미치는 영향</h2>
+                </div>
+                <div class="detail-video-pair">
+                    <figure class="detail-video-card">
+                        <video class="detail-video" src="../../assets/research/proportional-feedback-control/video/nocontrol-vorticity.mp4" width="992" height="416" poster="../../assets/research/proportional-feedback-control/video/nocontrol-vorticity-poster.jpg" muted loop playsinline preload="none" data-autoplay aria-label="LES animation of spanwise vorticity without control at Re = 3900"></video>
+                        <figcaption class="detail-figure-caption">비제어 유동 (스팬 방향 와도, x–y 평면)</figcaption>
+                    </figure>
+                    <figure class="detail-video-card">
+                        <video class="detail-video" src="../../assets/research/proportional-feedback-control/video/pcontrol-vorticity.mp4" width="992" height="416" poster="../../assets/research/proportional-feedback-control/video/pcontrol-vorticity-poster.jpg" muted loop playsinline preload="none" data-autoplay aria-label="LES animation of spanwise vorticity under proportional feedback control at Re = 3900"></video>
+                        <figcaption class="detail-figure-caption">평균 센싱 속도 기반 비례 되먹임 제어</figcaption>
+                    </figure>
+                </div>
+                <p class="detail-video-note">Re = 3900 LES 결과 영상(박사학위 논문 심사 발표 자료). 동작 줄이기 설정에서는 자동 재생되지 않는다.</p>
+                <div class="detail-figure-grid">
+                    <figure class="detail-figure-card">
+                        <img src="../../assets/research/proportional-feedback-control/sensing-averaging.jpg" alt="Time histories of instantaneous and averaged sensing velocities in the uncontrolled cylinder wake" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">비제어 후류의 센싱 속도. Re = 3900 난류의 순간 센싱 속도(검정)에는 고주파 성분이 포함되나, 시간 평균을 적용한 신호(파랑·초록)는 보텍스 쉐딩 주기를 명확히 추종한다. (a)의 점선은 Re = 100 층류의 신호이다. FIG. 10.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card">
+                        <img src="../../assets/research/proportional-feedback-control/turbulent-force-history.jpg" alt="Time histories of lift and drag coefficients without control, with instantaneous-sensing P control, and with averaged-sensing P control at Re = 3900" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">Re = 3900, α = 0.005에서의 양력 계수(a) 및 항력 계수(b). 순간 센싱 속도를 사용한 제어(파랑, T<sub>a</sub> = 0)는 섭동을 증가시키고, 평균 센싱 속도를 사용한 제어(초록, T<sub>a</sub>u<sub>∞</sub>/d = 1.74)는 섭동을 감소시킨다. 검정은 비제어 유동이다. FIG. 9.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card wide">
+                        <img src="../../assets/research/proportional-feedback-control/turbulent-vortical-structures.jpg" alt="Instantaneous vortical structures identified with the lambda-2 method at Re = 3900 without and with P control" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">Re = 3900 순간 와류 구조(λ<sub>2</sub> 기법): (a) 비제어, (b) 비례 제어(x<sub>s</sub>/d = 1.69, T<sub>a</sub>u<sub>∞</sub>/d = 1.44, α = 0.01, 스팬 방향 평균). 실린더 직후의 와류가 크게 억제되고 Kármán 보텍스 쉐딩이 약화된다. FIG. 18.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card">
+                        <img src="../../assets/research/proportional-feedback-control/laminar-vorticity-re100.jpg" alt="Instantaneous spanwise vorticity at Re = 100 without and with proportional control" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">Re = 100 와도장: (a) 비제어, (b) 비례 제어(x<sub>s</sub>/d = 1.5, T<sub>a</sub>u<sub>∞</sub>/d = 4.0, α = 0.4). 제어 후 보텍스 쉐딩 강도가 약화된다. FIG. 13.</figcaption>
+                    </figure>
+                    <figure class="detail-figure-card">
+                        <img src="../../assets/research/proportional-feedback-control/efficiency-vs-gain.jpg" alt="Control efficiency versus proportional gain at Re = 3900" class="detail-figure-image" loading="lazy" decoding="async">
+                        <figcaption class="detail-figure-caption">비례 게인 α에 따른 제어 효율 η<sub>a</sub>(절감 동력 ÷ 제어 입력 동력). α가 작을수록 효율이 높으며, α = 0.0025에서 약 167, α = 0.01에서 약 111이다. FIG. 20.</figcaption>
+                    </figure>
+                </div>
+                <p class="detail-figure-credit">그림: J. Yun and J. Lee, Phys. Fluids 34, 095133 (2022). Reproduced with the permission of AIP Publishing.</p>
+            </div>
+        </section>
+
+        <section class="detail-section detail-section-alt" id="results">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Main Results</span>
+                    <h2 class="section-title">단순 제어 법칙에 의한 고효율 폐쇄 루프 제어</h2>
+                    <p class="section-subtitle">센싱 위치와 센싱 속도의 평균 처리를 적절히 선정하면, 단순한 비례 제어로도 높은 제어 성능과 효율을 얻을 수 있다.</p>
+                </div>
+                <div class="detail-result-grid detail-result-grid-4">
+                    <div class="detail-result-card">
+                        <span class="detail-result-value">−61%</span>
+                        <span class="detail-result-label">Lift fluctuations C<sub>L,rms</sub> at Re = 3900</span>
+                    </div>
+                    <div class="detail-result-card">
+                        <span class="detail-result-value">−11%</span>
+                        <span class="detail-result-label">Mean drag C<sub>D</sub> at Re = 3900</span>
+                    </div>
+                    <div class="detail-result-card">
+                        <span class="detail-result-value">0.4%</span>
+                        <span class="detail-result-label">Actuation velocity ψ<sub>rms</sub>/u<sub>∞</sub> relative to the free stream</span>
+                    </div>
+                    <div class="detail-result-card">
+                        <span class="detail-result-value">111–167</span>
+                        <span class="detail-result-label">Control efficiency η<sub>a</sub> over the successful gains</span>
+                    </div>
+                </div>
+                <article class="detail-card">
+                    <h3 class="detail-card-title">해석</h3>
+                    <p>본 결과는 높은 제어 성능이 반드시 복잡한 신경망 제어기를 필요로 하지 않음을 보여 준다. 적절한 센싱 위치와 평균 센싱 속도만으로 후류 구조를 안정화할 수 있으며, 가진에 필요한 동력이 작아 절감 동력 대비 제어 효율이 높다. 순간 센싱 속도를 그대로 사용하면 동일한 게인에서도 섭동이 증가할 수 있으므로, 평균 센싱이 제어 성공의 핵심 요소이다.</p>
+                    <p>또한 본 비례 제어는 이후 평면 대칭성 보장 신경망(FCNN-PS) 기반 제어의 학습 대상이자 비교 기준이 된다.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="detail-section" id="outputs">
+            <div class="container">
+                <div class="detail-section-header">
+                    <span class="section-label">Related Outputs</span>
+                    <h2 class="section-title">논문 및 발표</h2>
+                </div>
+                <div class="detail-related-list">
+                    <article class="detail-related-item">
+                        <span class="detail-related-meta">Journal</span>
+                        <h3>Physics of Fluids 2022</h3>
+                        <p>J. Yun and J. Lee, "Active proportional feedback control of turbulent flow over a circular cylinder with averaged velocity sensor," <em>Physics of Fluids</em>, 34(9), 095133, 2022. <a href="https://doi.org/10.1063/5.0107561" target="_blank" rel="noopener">doi:10.1063/5.0107561</a></p>
+                    </article>
+                    <article class="detail-related-item">
+                        <span class="detail-related-meta">Journal</span>
+                        <h3>대한기계학회논문집 B 2023</h3>
+                        <p>윤진혁, 이정일, "저주파 통과 필터 처리된 센싱 속도 기반 원형 실린더 주위 난류 유동의 비례 되먹임 제어," <em>대한기계학회논문집 B</em>, 47(4), 235-243, 2023.</p>
+                    </article>
+                    <article class="detail-related-item">
+                        <span class="detail-related-meta">Journal</span>
+                        <h3>대한기계학회논문집 B 2023</h3>
+                        <p>윤진혁, 이정일, "평균 센싱 속도를 이용한 Re=300의 반구 주위 층류 유동의 비례 되먹임 제어," <em>대한기계학회논문집 B</em>, 47(3), 175-180, 2023.</p>
+                    </article>
+                    <article class="detail-related-item">
+                        <span class="detail-related-meta">Conference</span>
+                        <h3>JSME-KSME TFEC 2017 · 대한기계학회 2019</h3>
+                        <p>Proportional control of turbulent flow over a circular cylinder (Okinawa, 2017.10, 구두 발표) · 공간 평균된 속도 센서를 이용한 원형 실린더 주위 난류 유동의 비례 제어 (2019.04, 구두 발표).</p>
+                    </article>
+                    <article class="detail-related-item">
+                        <span class="detail-related-meta">Follow-up</span>
+                        <h3>평면 대칭성 보장 신경망 기반 제어의 학습 대상</h3>
+                        <p>본 비례 제어는 벽 압력 기반 FCNN-PS 제어의 학습 대상이자 비교 기준이다. <a href="../symmetry-preserving-control/index.html">대칭성 보장 신경망 제어</a></p>
+                    </article>
+                </div>
+                <div class="detail-pager">
+                    <a href="../symmetry-preserving-control/index.html" class="detail-pager-link">
+                        <small>Previous Research</small>
+                        <span>대칭성 보장 신경망 제어</span>
+                    </a>
+                    <a href="../channel-opposition-control/index.html" class="detail-pager-link">
+                        <small>Next Research</small>
+                        <span>난류 채널 유동 반대 제어</span>
+                    </a>
+                    <a href="../../index.html#highlights" class="detail-pager-link">
+                        <small>Back</small>
+                        <span>Research Highlights</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../../js/main.js?v=2026q3"></script>
+    <script type="module" src="../../js/lab/pcontrol.js?v=2026q3"></script>
+</body>
+</html>
